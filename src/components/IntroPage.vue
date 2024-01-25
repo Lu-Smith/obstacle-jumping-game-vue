@@ -1,6 +1,8 @@
 <template>
-      <h1>{{ msg }}</h1>
-      <button @click="handleStartGame">Start Game</button>
+  <div>
+    <h1>{{ msg }}</h1>
+    <button @click="handleStartGame">Start Game</button>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -12,3 +14,10 @@ const handleStartGame = () => {
   emits('startGame', true);
 };
 </script>
+
+<style lang="scss" scoped>
+  div {
+    background: $primary-background;
+    height: 30vw;
+  }
+</style>
