@@ -18,9 +18,12 @@
             context.fillRect(0, gameCanvas.value.height*0.92, gameCanvas.value.width, 4);
 
             // Draw circle
+            const circleX = gameCanvas.value.width * 0.05;
+            const circleY = gameCanvas.value.height * 0.856;
+
             context.fillStyle = 'rgb(250, 0, 0)';
             context.beginPath();
-            context.arc(10, gameCanvas.value.height*0.856, 10, 0, 2 * Math.PI);
+            context.arc(circleX, circleY, 10, 0, 2 * Math.PI);
             context.fill();
         }
     };
@@ -40,13 +43,14 @@
 
     canvas {
         background: $primary-background;
-        width: 90%;
-        height: 40%;
+        width: 800px;
+        height: 400px;
     }
 
     @include mobile {
         canvas {
             width: 100%;
+            height: auto;
         }
     }
 </style>
