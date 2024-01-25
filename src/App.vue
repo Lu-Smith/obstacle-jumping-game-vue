@@ -20,12 +20,11 @@ const handleStartGame = (value: boolean) => {
   startGame.value = value;
 };
 
-
 </script>
 
 <style lang="scss">
   div {
-    background: $primary-background;
+    background: $main-background;
     color: $primary-color;
     widows: 100vw;
     height: 100vh;
