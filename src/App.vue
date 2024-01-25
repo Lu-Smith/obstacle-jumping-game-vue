@@ -1,8 +1,7 @@
 <template>
   <div>
-   Hello
+    <IntroPage msg="Welcome" />
   </div>
-  <IntroPage msg="Welcome" />
 </template>
 
 <script setup lang="ts">
@@ -10,8 +9,10 @@ import IntroPage from './components/IntroPage.vue';
 </script>
 
 <style lang="scss">
-div {
-  background: $primary-background;
-  color: $primary-color;
-}
+  div {
+    background: $primary-background;
+    color: $primary-color;
+    widows: 100vw;
+    height: 100vh;
+  }
 </style>
