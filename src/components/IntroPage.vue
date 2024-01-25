@@ -6,19 +6,21 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ msg: string }>();
+  defineProps<{ msg: string }>();
 
-const emits = defineEmits(['startGame']);
+  const emits = defineEmits(['startGame']);
 
-const handleStartGame = () => {
-  emits('startGame', true);
-};
+  const handleStartGame = () => {
+    emits('startGame', true);
+  };
 </script>
 
 <style lang="scss" scoped>
   div {
     background: $primary-background;
     height: 30vw;
+    @include flex(center, center, column);
+    width: 100vw;
 
     h1 {
       color: $secondary-color;
