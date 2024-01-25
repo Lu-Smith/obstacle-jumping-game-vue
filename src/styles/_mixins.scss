@@ -1,0 +1,16 @@
+@mixin flex($align, $jc, $fd) {
+    display: flex;
+    align-items: $align;
+    justify-content: $jc;
+    flex-direction: $fd;
+}
+
+@mixin mobile {
+    @media (max-width: 786px) {
+        @content
+    }
+};
+
+
+
+

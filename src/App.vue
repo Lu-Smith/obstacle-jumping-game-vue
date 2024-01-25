@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import IntroPage from './components/IntroPage.vue'
-</script>
-
 <template>
   <div>
    Hello
@@ -9,6 +5,13 @@ import IntroPage from './components/IntroPage.vue'
   <IntroPage msg="Welcome" />
 </template>
 
-<style scoped>
+<script setup lang="ts">
+import IntroPage from './components/IntroPage.vue';
+import './styles/app.scss';
+</script>
 
+<style scoped lang="scss">
+div {
+  background: $primary-background;
+}
 </style>
