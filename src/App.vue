@@ -24,13 +24,12 @@
   div {
     background: $main-background;
     color: $primary-color;
-    widows: 100vw;
+    width: 100vw;
     height: 100vh;
     font-family: 'Roboto', sans-serif;
   }
 
   .mainPage {
     @include flex(center, center, column);
-    width: 100vw;
   }
 </style>
