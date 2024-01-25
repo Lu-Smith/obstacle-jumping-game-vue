@@ -14,13 +14,13 @@
 
         if (context && gameCanvas.value) {
             // Draw rectangle
-            context.fillStyle = '#4c9173';
+            context.fillStyle = '#000';
             context.fillRect(0, gameCanvas.value.height*0.92, gameCanvas.value.width, 4);
 
             // Draw circle
-            context.fillStyle = 'rgb(29, 224, 227)';
+            context.fillStyle = 'rgb(250, 0, 0)';
             context.beginPath();
-            context.arc(120, 40, 10, 0, 2 * Math.PI);
+            context.arc(10, gameCanvas.value.height*0.856, 10, 0, 2 * Math.PI);
             context.fill();
         }
     };
