@@ -12,15 +12,15 @@
     const drawGame = () => {
         const context = gameCanvas.value?.getContext('2d');
 
-        if (context) {
+        if (context && gameCanvas.value) {
             // Draw rectangle
-            context.fillStyle = 'rgb(227, 224, 29)';
-            context.fillRect(20, 20, 60, 40);
+            context.fillStyle = '#4c9173';
+            context.fillRect(0, gameCanvas.value.height*0.92, gameCanvas.value.width, 4);
 
             // Draw circle
             context.fillStyle = 'rgb(29, 224, 227)';
             context.beginPath();
-            context.arc(120, 40, 30, 0, 2 * Math.PI);
+            context.arc(120, 40, 10, 0, 2 * Math.PI);
             context.fill();
         }
     };
