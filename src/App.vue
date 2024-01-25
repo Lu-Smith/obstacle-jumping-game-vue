@@ -4,7 +4,7 @@
       <Game />
     </div>
     <div v-if="!startGame">
-      <IntroPage msg="Welcome" />
+      <IntroPage msg="Welcome" @startGame="handleStartGame"/>
     </div>
   </div>
 </template>
@@ -15,6 +15,12 @@ import IntroPage from './components/IntroPage.vue';
 import { ref } from 'vue';
 
 const startGame = ref(false);
+
+const handleStartGame = (value: boolean) => {
+  startGame.value = value;
+};
+
+
 </script>
 
 <style lang="scss">
