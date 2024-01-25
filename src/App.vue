@@ -1,10 +1,12 @@
 <template>
   <div>
+    <Game />
     <IntroPage msg="Welcome" />
   </div>
 </template>
 
 <script setup lang="ts">
+import Game from './components/Game.vue';
 import IntroPage from './components/IntroPage.vue';
 </script>
 
