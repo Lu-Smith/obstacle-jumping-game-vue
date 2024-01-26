@@ -1,8 +1,12 @@
 <template>
     <div class="gameContainer">
         <div class="buttonContainer">
-            <button @click="startGame">Go</button>
-            <button @click="pauseGame">Pause</button>
+            <button 
+            v-if="!gameRunning"
+            @click="startGame">Go</button>
+            <button 
+            v-else
+            @click="pauseGame">Pause</button>
         </div>
         <div class="canvasContainer">
             <canvas ref="gameCanvas"></canvas>
@@ -16,6 +20,7 @@
     const gameCanvas = ref<HTMLCanvasElement | null>(null);
     const direction = ref([ 1, 0 ]);
     const circleSpeed = ref(5);
+    const gameRunning = ref(false);
     let gameInterval: undefined | number;
     let intervalTime: number = 30;
 
@@ -59,9 +64,11 @@
 
     const startGame = () => {
         gameInterval = setInterval(updateGame, intervalTime);
+        gameRunning.value = true
     }
 
     const pauseGame = () => {
+        gameRunning.value = false;
         clearInterval(gameInterval);
     }
 
