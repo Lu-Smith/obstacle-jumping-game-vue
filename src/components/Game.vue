@@ -21,6 +21,7 @@
     const jump = ref(false);
     const circleXPosition = ref(5);
     const circleYPosition = ref(0);
+    const obstacleXPosition = ref(0);
     const gameRunning = ref(false);
     const circleX = ref(0);
     const circleY = ref(0);
@@ -86,17 +87,17 @@
             // Draw obstacle
             context.fillStyle = '#4c9173';
             context.beginPath();
-            context.arc(gameCanvas.value.width - 10, gameCanvas.value.height * 0.76, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 7, gameCanvas.value.height * 0.7, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 2, gameCanvas.value.height * 0.7, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width, gameCanvas.value.height * 0.76, 5, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width - 10 + obstacleXPosition.value, gameCanvas.value.height * 0.76, 5, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width - 7 + obstacleXPosition.value, gameCanvas.value.height * 0.7, 5, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width - 2 + obstacleXPosition.value, gameCanvas.value.height * 0.7, 5, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width + obstacleXPosition.value, gameCanvas.value.height * 0.76, 5, 0, 2 * Math.PI);
             context.fill();
             context.fillStyle = '#402a23';
             context.beginPath();
-            context.arc(gameCanvas.value.width - 2, gameCanvas.value.height * 0.77, 6, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width - 2 + obstacleXPosition.value, gameCanvas.value.height * 0.77, 6, 0, 2 * Math.PI);
             context.fill();
             context.fillStyle = '#402a23';
-            context.fillRect(gameCanvas.value.width - 8, gameCanvas.value.height * 0.78, 8, 22);
+            context.fillRect(gameCanvas.value.width - 8 + obstacleXPosition.value, gameCanvas.value.height * 0.78, 8, 22);
         }
     }
 
