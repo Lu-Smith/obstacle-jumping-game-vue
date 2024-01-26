@@ -54,7 +54,12 @@
             context.fillRect(0, gameCanvas.value.height * 0.92, gameCanvas.value.width, 4);
 
             // Update circle position dynamically
-            circleX.value += 5 + direction.value[0] * circleSpeed.value;
+            if (circleX.value < gameCanvas.value.width/2) {
+                circleX.value += 5 + direction.value[0] * circleSpeed.value;
+            } else {
+                circleX.value = gameCanvas.value.width/2;
+            }
+           
             circleY.value = gameCanvas.value.height * 0.856;
 
             // Draw circle
