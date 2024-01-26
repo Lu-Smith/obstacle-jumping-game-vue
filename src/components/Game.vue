@@ -8,6 +8,19 @@
     import { ref, onMounted } from 'vue';
 
     const gameCanvas = ref<HTMLCanvasElement | null>(null);
+    const direction = ref([ 1, 0 ]);
+
+    //game logic
+    const handleKeyDown = (event: KeyboardEvent) => {
+        switch (event.key) {
+            case "ArrowUp":
+                direction.value =[ 0, -1 ];
+                break
+            case "ArrowRight":
+                direction.value =[ 1, 0 ];
+                break
+        }
+    };
 
     const drawGame = () => {
         const context = gameCanvas.value?.getContext('2d');
@@ -30,6 +43,7 @@
 
     onMounted(() => {
         drawGame();
+        window.addEventListener('keydown', handleKeyDown);
     });
 </script>
 
