@@ -2,6 +2,7 @@
     <div class="gameContainer">
         <div class="buttonContainer">
             <button @click="startGame">Go</button>
+            <button @click="pauseGame">Pause</button>
         </div>
         <div class="canvasContainer">
             <canvas ref="gameCanvas"></canvas>
@@ -14,6 +15,7 @@
 
     const gameCanvas = ref<HTMLCanvasElement | null>(null);
     const direction = ref([ 1, 0 ]);
+    const circleSpeed = ref(5);
     let gameInterval: undefined | number;
     let intervalTime: number = 30;
 
@@ -23,42 +25,49 @@
             case "ArrowUp":
                 direction.value =[ 0, -1 ];
                 break
-            case "ArrowRight":
-                direction.value =[ 1, 0 ];
-                break
         }
     };
 
-    const drawGame = () => {
-        const context = gameCanvas.value?.getContext('2d');
-
-        if (context && gameCanvas.value) {
-            // Draw rectangle
-            context.fillStyle = '#000';
-            context.fillRect(0, gameCanvas.value.height*0.92, gameCanvas.value.width, 4);
-
-            // Draw circle
-            const circleX = gameCanvas.value.width * 0.05;
-            const circleY = gameCanvas.value.height * 0.856;
-
-            context.fillStyle = 'rgb(250, 0, 0)';
-            context.beginPath();
-            context.arc(circleX, circleY, 10, 0, 2 * Math.PI);
-            context.fill();
+    const handleMouseEvent = (event: MouseEvent) => {
+        if (event) {
+            direction.value =[ 0, -1 ];
         }
     };
 
     const updateGame = () => {
+        const context = gameCanvas.value?.getContext('2d');
 
+        if (context && gameCanvas.value) {
+            // Clear the canvas
+            context.clearRect(0, 0, gameCanvas.value.width, gameCanvas.value.height);
+
+            // Draw rectangle
+            context.fillStyle = '#000';
+            context.fillRect(0, gameCanvas.value.height * 0.92, gameCanvas.value.width, 4);
+
+            // Update circle position
+            const circleX = gameCanvas.value.width * 0.033 + direction.value[0] * circleSpeed.value;
+            const circleY = gameCanvas.value.height * 0.856;
+
+            // Draw circle
+            context.fillStyle = '#5b086b';
+            context.beginPath();
+            context.arc(circleX, circleY, 10, 0, 2 * Math.PI);
+            context.fill();
+        }
     }
 
     const startGame = () => {
         gameInterval = setInterval(updateGame, intervalTime);
     }
 
+    const pauseGame = () => {
+        clearInterval(gameInterval);
+    }
+
     onMounted(() => {
-        drawGame();
         window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('mousedown', handleMouseEvent);
     });
 </script>
 
