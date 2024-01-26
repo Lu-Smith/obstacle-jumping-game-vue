@@ -53,12 +53,18 @@
             context.fillStyle = '#000';
             context.fillRect(0, gameCanvas.value.height * 0.92, gameCanvas.value.width, 4);
 
+            // Update circle position dynamically
+            circleX.value += 5 + direction.value[0] * circleSpeed.value;
+            circleY.value = gameCanvas.value.height * 0.856;
+
             // Draw circle
             context.fillStyle = '#5b086b';
             context.beginPath();
             context.arc(circleX.value, circleY.value, 10, 0, 2 * Math.PI);
             context.fill();
         }
+
+        console.log(circleSpeed.value);
     }
 
     const startGame = () => {
@@ -72,11 +78,6 @@
     }
 
     onMounted(() => {
-        if (gameCanvas.value) {
-        circleX.value = gameCanvas.value.width * 0.033 + direction.value[0] * circleSpeed.value;
-        circleY.value = gameCanvas.value.height * 0.856;
-        };
-        
         window.addEventListener('keydown', handleKeyDown);
         window.addEventListener('mousedown', handleMouseEvent);
     });
