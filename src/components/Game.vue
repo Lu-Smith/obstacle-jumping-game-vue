@@ -64,11 +64,16 @@
             }
            
             if (jump.value) {
-                circleYPosition.value = -30;
+                if (circleYPosition.value > -30) {
+                    circleYPosition.value -= 2; 
+                }
                 circleY.value = gameCanvas.value.height * 0.856 + circleYPosition.value;
-                setTimeout(() => {
-                    jump.value = false;
-                }, 1000);
+                if (circleYPosition.value === -30) {
+                    setTimeout(() => {
+                        jump.value = false;
+                        circleYPosition.value = 0;
+                    }, 600);
+                }
              
             } else {
                 circleY.value = gameCanvas.value.height * 0.856;
