@@ -18,8 +18,8 @@
     import { ref, onMounted } from 'vue';
 
     const gameCanvas = ref<HTMLCanvasElement | null>(null);
-    const direction = ref([ 1, 0 ]);
-    const circleSpeed = ref(5);
+    const jump = ref(false);
+    const circleXPosition = ref(5);
     const gameRunning = ref(false);
     const circleX = ref(0);
     const circleY = ref(0);
@@ -30,20 +30,20 @@
     const handleKeyDown = (event: KeyboardEvent) => {
         switch (event.key) {
             case "ArrowUp":
-                direction.value =[ 0, -1 ];
+                jump.value = true;
                 break
         }
     };
 
     const handleMouseEvent = (event: MouseEvent) => {
         if (event) {
-            direction.value =[ 0, -1 ];
+            jump.value = true;
         }
     };
 
     const updateGame = () => {
         const context = gameCanvas.value?.getContext('2d');
-        circleSpeed.value++;
+       
 
         if (context && gameCanvas.value) {
             // Clear the canvas
@@ -55,8 +55,10 @@
 
             // Update circle position dynamically
             if (circleX.value < gameCanvas.value.width/2) {
-                circleX.value += 5 + direction.value[0] * circleSpeed.value;
+                circleXPosition.value++;
+                circleX.value += 5 + circleXPosition.value;
             } else {
+                circleXPosition.value = circleXPosition.value;
                 circleX.value = gameCanvas.value.width/2;
             }
            
@@ -69,7 +71,7 @@
             context.fill();
         }
 
-        console.log(circleSpeed.value);
+        console.log(circleXPosition.value);
     }
 
     const startGame = () => {
