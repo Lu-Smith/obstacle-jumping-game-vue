@@ -21,6 +21,8 @@
     const direction = ref([ 1, 0 ]);
     const circleSpeed = ref(5);
     const gameRunning = ref(false);
+    const circleX = ref(0);
+    const circleY = ref(0);
     let gameInterval: undefined | number;
     let intervalTime: number = 30;
 
@@ -41,6 +43,7 @@
 
     const updateGame = () => {
         const context = gameCanvas.value?.getContext('2d');
+        circleSpeed.value++;
 
         if (context && gameCanvas.value) {
             // Clear the canvas
@@ -50,14 +53,10 @@
             context.fillStyle = '#000';
             context.fillRect(0, gameCanvas.value.height * 0.92, gameCanvas.value.width, 4);
 
-            // Update circle position
-            const circleX = gameCanvas.value.width * 0.033 + direction.value[0] * circleSpeed.value;
-            const circleY = gameCanvas.value.height * 0.856;
-
             // Draw circle
             context.fillStyle = '#5b086b';
             context.beginPath();
-            context.arc(circleX, circleY, 10, 0, 2 * Math.PI);
+            context.arc(circleX.value, circleY.value, 10, 0, 2 * Math.PI);
             context.fill();
         }
     }
@@ -73,6 +72,11 @@
     }
 
     onMounted(() => {
+        if (gameCanvas.value) {
+        circleX.value = gameCanvas.value.width * 0.033 + direction.value[0] * circleSpeed.value;
+        circleY.value = gameCanvas.value.height * 0.856;
+        };
+        
         window.addEventListener('keydown', handleKeyDown);
         window.addEventListener('mousedown', handleMouseEvent);
     });
