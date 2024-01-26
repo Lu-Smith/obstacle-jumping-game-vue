@@ -20,6 +20,7 @@
     const gameCanvas = ref<HTMLCanvasElement | null>(null);
     const jump = ref(false);
     const circleXPosition = ref(5);
+    const circleYPosition = ref(0);
     const gameRunning = ref(false);
     const circleX = ref(0);
     const circleY = ref(0);
@@ -62,7 +63,17 @@
                 circleX.value = gameCanvas.value.width/2;
             }
            
-            circleY.value = gameCanvas.value.height * 0.856;
+            if (jump.value) {
+                circleYPosition.value = -30;
+                circleY.value = gameCanvas.value.height * 0.856 + circleYPosition.value;
+                setTimeout(() => {
+                    jump.value = false;
+                }, 1000);
+             
+            } else {
+                circleY.value = gameCanvas.value.height * 0.856;
+            }
+            
 
             // Draw circle
             context.fillStyle = '#5b086b';
@@ -75,6 +86,7 @@
     }
 
     const startGame = () => {
+        jump.value = false;
         gameInterval = setInterval(updateGame, intervalTime);
         gameRunning.value = true
     }
