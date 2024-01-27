@@ -26,7 +26,7 @@
     const circleX = ref(0);
     const circleY = ref(0);
     let gameInterval: undefined | number;
-    let intervalTime: number = 30;
+    let intervalTime: number = 160;
 
     //game logic
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -64,19 +64,21 @@
             }
            
             if (jump.value) {
-                if (circleYPosition.value > -30) {
-                    circleYPosition.value -= 2; 
+                if (circleYPosition.value > -37) {
+                    circleYPosition.value -= 5; 
                 }
                 circleY.value = gameCanvas.value.height * 0.856 + circleYPosition.value;
-                if (circleYPosition.value === -30) {
+                if (circleYPosition.value === -40) {
                     setTimeout(() => {
                         jump.value = false;
                         circleYPosition.value = 0;
-                    }, 600);
+                    }, 900);
                 }
             } else {
                 circleY.value = gameCanvas.value.height * 0.856;
             }
+
+            console.log(circleYPosition.value);
 
             // Draw circle
             context.fillStyle = '#5b086b';
@@ -85,19 +87,27 @@
             context.fill();
 
             // Draw obstacle
+            if (circleX.value < gameCanvas.value.width/2) {
+                obstacleXPosition.value -= 8;
+            } else {
+                obstacleXPosition.value -= 4.5;
+            }
             context.fillStyle = '#4c9173';
             context.beginPath();
-            context.arc(gameCanvas.value.width - 10 + obstacleXPosition.value, gameCanvas.value.height * 0.76, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 7 + obstacleXPosition.value, gameCanvas.value.height * 0.7, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 2 + obstacleXPosition.value, gameCanvas.value.height * 0.7, 5, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width - 11 + obstacleXPosition.value, gameCanvas.value.height * 0.84, 5, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width - 10 + obstacleXPosition.value, gameCanvas.value.height * 0.8, 5, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width - 7 + obstacleXPosition.value, gameCanvas.value.height * 0.76, 5, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width - 4 + obstacleXPosition.value, gameCanvas.value.height * 0.72, 5, 0, 2 * Math.PI);
             context.arc(gameCanvas.value.width + obstacleXPosition.value, gameCanvas.value.height * 0.76, 5, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width + 2 + obstacleXPosition.value, gameCanvas.value.height * 0.8, 5, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width + 3 + obstacleXPosition.value, gameCanvas.value.height * 0.84, 5, 0, 2 * Math.PI);
             context.fill();
             context.fillStyle = '#402a23';
             context.beginPath();
-            context.arc(gameCanvas.value.width - 2 + obstacleXPosition.value, gameCanvas.value.height * 0.77, 6, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width - 4.5 + obstacleXPosition.value, gameCanvas.value.height * 0.78, 2.5, 0, 2 * Math.PI);
             context.fill();
             context.fillStyle = '#402a23';
-            context.fillRect(gameCanvas.value.width - 8 + obstacleXPosition.value, gameCanvas.value.height * 0.78, 8, 22);
+            context.fillRect(gameCanvas.value.width - 7.5 + obstacleXPosition.value, gameCanvas.value.height * 0.78, 6, 22);
         }
     }
 
