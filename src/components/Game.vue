@@ -19,6 +19,7 @@
 
     const gameCanvas = ref<HTMLCanvasElement | null>(null);
     const jump = ref(false);
+    const doubleJump = ref(false);
     const circleXPosition = ref(5);
     const circleYPosition = ref(0);
     const obstacleXPosition1 = ref(0);
@@ -30,16 +31,33 @@
     let intervalTime: number = 160;
 
     //game logic
+    let lastArrowUpPressTime = 0;
     const handleKeyDown = (event: KeyboardEvent) => {
         switch (event.key) {
             case "ArrowUp":
+            if (event.repeat) {
+                return;
+            }
+
+            const currentTime = new Date().getTime();
+
+            if (currentTime - lastArrowUpPressTime < 1000) {
+                // If the time difference between two presses is less than 300 milliseconds, consider it a double press
+                doubleJump.value = true;
+            } else {
                 jump.value = true;
-                break
+            }
+
+            lastArrowUpPressTime = currentTime;
+            break;
         }
     };
 
     const handleMouseEvent = (event: MouseEvent) => {
-        if (event) {
+        if (event.detail === 2) {
+            // Double click detected
+            doubleJump.value = true;
+        } else {
             jump.value = true;
         }
     };
@@ -131,7 +149,7 @@
                 obstacleXPosition2.value -= 4.5;
             }
 
-            console.log(obstacleXPosition2.value);
+            console.log(doubleJump.value);
             context.fillStyle = '#acc6aa';
             context.beginPath();
             context.arc(gameCanvas.value.width - 11 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.84, 5, 0, 2 * Math.PI);
