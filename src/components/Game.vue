@@ -59,8 +59,13 @@
                 circleXPosition.value++;
                 circleX.value += 5 + circleXPosition.value;
             } else {
-                circleXPosition.value = circleXPosition.value;
-                circleX.value = gameCanvas.value.width/2;
+                if (jump.value) {
+                    circleXPosition.value += 0.5;
+                    circleX.value = 5 + gameCanvas.value.width/2 + circleXPosition.value;
+                 } else {
+                    circleXPosition.value -= 0.3;
+                    circleX.value = 5 + gameCanvas.value.width/2 + circleXPosition.value;
+                }
             }
            
             if (jump.value) {
