@@ -42,7 +42,7 @@
             const currentTime = new Date().getTime();
 
             if (currentTime - lastArrowUpPressTime < 1000) {
-                // If the time difference between two presses is less than 300 milliseconds, consider it a double press
+                // Double click detected
                 doubleJump.value = true;
             } else {
                 jump.value = true;
@@ -81,7 +81,10 @@
                 if (jump.value) {
                     circleXPosition.value += 0.5;
                     circleX.value = 5 + gameCanvas.value.width/2 + circleXPosition.value;
-                 } else {
+                } else  if (doubleJump.value) {
+                    circleXPosition.value += 1;
+                    circleX.value = 5 + gameCanvas.value.width/2 + circleXPosition.value;
+                } else {
                     circleXPosition.value -= 0.3;
                     circleX.value = 5 + gameCanvas.value.width/2 + circleXPosition.value;
                 }
@@ -103,11 +106,24 @@
                     }, 900);
                 }
                 circleY.value = gameCanvas.value.height * 0.856 + circleYPosition.value;
-        
+            } else  if (doubleJump.value) {
+                if (circleX.value < gameCanvas.value.width/2) {
+                    circleYPosition.value = circleYPosition.value;
+                } else if (circleYPosition.value > -43) {
+                    circleYPosition.value = -44;
+                } else if (circleYPosition.value === -44) {
+                    setTimeout(() => {
+                        doubleJump.value = false;
+                        circleYPosition.value = 0;
+                    }, 700);
+                }
+                circleY.value = gameCanvas.value.height * 0.856 + circleYPosition.value;
+
             } else {
                 circleY.value = gameCanvas.value.height * 0.856;
             }
 
+            console.log(circleYPosition.value);
             // Draw circle
             context.fillStyle = '#5b086b';
             context.beginPath();
