@@ -158,11 +158,11 @@
 
             // Draw obstacle2
             if (circleX.value < gameCanvas.value.width/2 && obstacleXPosition2.value > -468) {
-                obstacleXPosition2.value -= 9;
+                obstacleXPosition2.value -= 9.5;
             } else if (obstacleXPosition2.value < -468) {
                 obstacleXPosition2.value = 0;
             } else {
-                obstacleXPosition2.value -= 4.5;
+                obstacleXPosition2.value -= 5;
             }
 
             console.log(doubleJump.value);
