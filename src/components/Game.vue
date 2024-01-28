@@ -64,21 +64,22 @@
             }
            
             if (jump.value) {
-                if (circleYPosition.value > -37) {
+                if (circleX.value < gameCanvas.value.width/2) {
+                    circleYPosition.value = circleYPosition.value;
+                } else if (circleYPosition.value > -37) {
                     circleYPosition.value -= 2;
                     circleYPosition.value -= 1;
                     circleYPosition.value -= 2;
                     circleYPosition.value -= 1;
                     circleYPosition.value -= 2;
-                    
-                }
-                circleY.value = gameCanvas.value.height * 0.856 + circleYPosition.value;
-                if (circleYPosition.value === -40) {
+                } else if (circleYPosition.value === -40) {
                     setTimeout(() => {
                         jump.value = false;
                         circleYPosition.value = 0;
                     }, 900);
                 }
+                circleY.value = gameCanvas.value.height * 0.856 + circleYPosition.value;
+        
             } else {
                 circleY.value = gameCanvas.value.height * 0.856;
             }
