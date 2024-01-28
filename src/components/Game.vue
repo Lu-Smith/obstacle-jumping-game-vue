@@ -65,7 +65,12 @@
            
             if (jump.value) {
                 if (circleYPosition.value > -37) {
-                    circleYPosition.value -= 5; 
+                    circleYPosition.value -= 2;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 2;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 2;
+                    
                 }
                 circleY.value = gameCanvas.value.height * 0.856 + circleYPosition.value;
                 if (circleYPosition.value === -40) {
@@ -78,7 +83,7 @@
                 circleY.value = gameCanvas.value.height * 0.856;
             }
 
-            console.log(circleYPosition.value);
+            console.log(circleXPosition.value);
 
             // Draw circle
             context.fillStyle = '#5b086b';
