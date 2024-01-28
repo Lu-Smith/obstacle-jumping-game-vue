@@ -89,7 +89,7 @@
                 circleY.value = gameCanvas.value.height * 0.856;
             }
 
-            console.log(circleXPosition.value);
+          
 
             // Draw circle
             context.fillStyle = '#5b086b';
@@ -98,11 +98,15 @@
             context.fill();
 
             // Draw obstacle
-            if (circleX.value < gameCanvas.value.width/2) {
-                obstacleXPosition.value -= 8;
+            if (circleX.value < gameCanvas.value.width/2 && obstacleXPosition.value > -288) {
+                obstacleXPosition.value -= 9;
+            } else if (obstacleXPosition.value < -288) {
+                obstacleXPosition.value = 0;
             } else {
                 obstacleXPosition.value -= 4.5;
             }
+
+            console.log(obstacleXPosition.value);
             context.fillStyle = '#4c9173';
             context.beginPath();
             context.arc(gameCanvas.value.width - 11 + obstacleXPosition.value, gameCanvas.value.height * 0.84, 5, 0, 2 * Math.PI);
