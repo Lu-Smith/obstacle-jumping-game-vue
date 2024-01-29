@@ -130,7 +130,7 @@
             context.arc(circleX.value, circleY.value, 10, 0, 2 * Math.PI);
             context.fill();
 
-            // Draw obstacle1
+            // Draw obstacle1 - a dark tree
             if (circleX.value < gameCanvas.value.width/2 && obstacleXPosition1.value > -288) {
                 obstacleXPosition1.value -= 9;
             } else if (obstacleXPosition1.value < -288) {
@@ -156,7 +156,7 @@
             context.fillStyle = '#402a23';
             context.fillRect(gameCanvas.value.width - 7.5 + obstacleXPosition1.value, gameCanvas.value.height * 0.78, 6, 22);
 
-            // Draw obstacle2
+            // Draw obstacle2 - a light tree
             if (circleX.value < gameCanvas.value.width/2 && obstacleXPosition2.value > -468) {
                 obstacleXPosition2.value -= 9.5;
             } else if (obstacleXPosition2.value < -468) {
@@ -182,6 +182,24 @@
             context.fill();
             context.fillStyle = '#402a23';
             context.fillRect(gameCanvas.value.width - 7.5 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.78, 6, 22);
+        
+            // Draw obstacle3 - a stone
+            if (circleX.value < gameCanvas.value.width/2 && obstacleXPosition2.value > -468) {
+                obstacleXPosition2.value -= 9.5;
+            } else if (obstacleXPosition2.value < -468) {
+                obstacleXPosition2.value = 0;
+            } else {
+                obstacleXPosition2.value -= 5;
+            }
+
+            console.log(doubleJump.value);
+            context.fillStyle = '#000';
+            context.beginPath();
+            context.arc(gameCanvas.value.width - 4.5 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.78, 6, 0, 2 * Math.PI);
+            context.fill();
+            context.fillStyle = '#000';
+            context.fillRect(gameCanvas.value.width - 7.5 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.78, 20, 20);
+        
         }
     }
 
