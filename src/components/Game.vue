@@ -194,12 +194,18 @@
 
             console.log(doubleJump.value);
             context.fillStyle = '#000';
+            const x1 = gameCanvas.value.width - 4.5 + obstacleXPosition2.value + 200;
+            const y1 = gameCanvas.value.width - 4.5 + obstacleXPosition2.value + 200;
+            const x2 = obstacleXPosition2.value + 200;
+            const y2 = gameCanvas.value.height * 0.78;
+            const x3 = obstacleXPosition2.value + 200;
+            const y3 = gameCanvas.value.width - 4.5 + obstacleXPosition2.value + 200;
             context.beginPath();
-            context.arc(gameCanvas.value.width - 4.5 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.78, 6, 0, 2 * Math.PI);
+            context.moveTo(x1, y1);
+            context.lineTo(x2, y2)
+            context.lineTo(x3, y3);
+            context.closePath();
             context.fill();
-            context.fillStyle = '#000';
-            context.fillRect(gameCanvas.value.width - 7.5 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.78, 20, 20);
-        
         }
     }
 
