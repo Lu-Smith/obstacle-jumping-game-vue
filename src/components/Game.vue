@@ -194,12 +194,12 @@
 
             console.log(doubleJump.value);
             context.fillStyle = '#000';
-            const x1 = gameCanvas.value.width - 4.5 + obstacleXPosition2.value + 200;
-            const y1 = gameCanvas.value.width - 4.5 + obstacleXPosition2.value + 200;
-            const x2 = obstacleXPosition2.value + 200;
-            const y2 = gameCanvas.value.height * 0.78;
-            const x3 = obstacleXPosition2.value + 200;
-            const y3 = gameCanvas.value.width - 4.5 + obstacleXPosition2.value + 200;
+            const x1 = gameCanvas.value.width - 11;
+            const y1 = gameCanvas.value.height - 30;
+            const x2 = gameCanvas.value.width - 22;
+            const y2 = gameCanvas.value.height - 10;
+            const x3 = gameCanvas.value.width;
+            const y3 = gameCanvas.value.height - 10;
             context.beginPath();
             context.moveTo(x1, y1);
             context.lineTo(x2, y2)
