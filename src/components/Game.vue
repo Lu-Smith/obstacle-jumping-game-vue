@@ -25,6 +25,7 @@
     const obstacleXPosition1 = ref(0);
     const obstacleXPosition2 = ref(0);
     const obstacleXPosition3 = ref(0);
+    const obstacleXPosition4 = ref(0);
     const gameRunning = ref(false);
     const circleX = ref(0);
     const circleY = ref(0);
@@ -207,6 +208,26 @@
             context.lineTo(x2, y2)
             context.lineTo(x3, y3);
             context.closePath();
+            context.fill();
+
+            // Draw a cloud
+            if (circleX.value < gameCanvas.value.width/2 && obstacleXPosition4.value > - 768) {
+                obstacleXPosition4.value -= 10;
+            } else if (obstacleXPosition4.value < -768) {
+                obstacleXPosition4.value = 0;
+            } else {
+                obstacleXPosition4.value -= 7;
+            }
+
+            context.fillStyle = '#bbe4e9';
+            context.beginPath();
+            context.arc(gameCanvas.value.width - 14 + obstacleXPosition4.value, gameCanvas.value.height * 0.2, 8, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width - 13 + obstacleXPosition4.value, gameCanvas.value.height * 0.23, 8, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width - 9 + obstacleXPosition4.value, gameCanvas.value.height * 0.18, 8, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width - 6 + obstacleXPosition4.value, gameCanvas.value.height * 0.22, 8, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width + obstacleXPosition4.value, gameCanvas.value.height * 0.16, 8, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width + 4 + obstacleXPosition4.value, gameCanvas.value.height * 0.18, 8, 0, 2 * Math.PI);
+            context.arc(gameCanvas.value.width + 7 + obstacleXPosition4.value, gameCanvas.value.height * 0.22, 8, 0, 2 * Math.PI);
             context.fill();
         }
     }
