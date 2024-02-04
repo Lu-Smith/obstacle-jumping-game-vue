@@ -24,6 +24,7 @@
     const circleYPosition = ref(0);
     const obstacleXPosition1 = ref(0);
     const obstacleXPosition2 = ref(0);
+    const obstacleXPosition3 = ref(0);
     const gameRunning = ref(false);
     const circleX = ref(0);
     const circleY = ref(0);
@@ -136,7 +137,7 @@
             } else if (obstacleXPosition1.value < -288) {
                 obstacleXPosition1.value = 0;
             } else {
-                obstacleXPosition1.value -= 4.5;
+                obstacleXPosition1.value -= 5;
             }
 
             context.fillStyle = '#4c9173';
@@ -158,7 +159,7 @@
 
             // Draw obstacle2 - a light tree
             if (circleX.value < gameCanvas.value.width/2 && obstacleXPosition2.value > -468) {
-                obstacleXPosition2.value -= 9.5;
+                obstacleXPosition2.value -= 9;
             } else if (obstacleXPosition2.value < -468) {
                 obstacleXPosition2.value = 0;
             } else {
@@ -184,21 +185,22 @@
             context.fillRect(gameCanvas.value.width - 7.5 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.78, 6, 22);
         
             // Draw obstacle3 - a stone
-            if (circleX.value < gameCanvas.value.width/2 && obstacleXPosition2.value > -468) {
-                obstacleXPosition2.value -= 9.5;
-            } else if (obstacleXPosition2.value < -468) {
-                obstacleXPosition2.value = 0;
+            if (circleX.value < gameCanvas.value.width/2 && obstacleXPosition3.value > - 768) {
+                obstacleXPosition3.value -= 9;
+            } else if (obstacleXPosition3.value < -768) {
+                obstacleXPosition3.value = 0;
             } else {
-                obstacleXPosition2.value -= 5;
+                obstacleXPosition3.value -= 5;
             }
 
             console.log(doubleJump.value);
+
             context.fillStyle = '#000';
-            const x1 = gameCanvas.value.width - 11;
+            const x1 = gameCanvas.value.width - 11 + obstacleXPosition3.value + 30;
             const y1 = gameCanvas.value.height - 30;
-            const x2 = gameCanvas.value.width - 22;
+            const x2 = gameCanvas.value.width - 22 + obstacleXPosition3.value + 30;
             const y2 = gameCanvas.value.height - 10;
-            const x3 = gameCanvas.value.width;
+            const x3 = gameCanvas.value.width + obstacleXPosition3.value + 30;
             const y3 = gameCanvas.value.height - 10;
             context.beginPath();
             context.moveTo(x1, y1);
