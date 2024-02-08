@@ -87,26 +87,38 @@
                     circleXPosition.value += 1;
                     circleX.value = 5 + gameCanvas.value.width/2 + circleXPosition.value;
                 } else {
-                    circleXPosition.value -= 0.3;
+                    circleXPosition.value -= 0.4;
                     circleX.value = 5 + gameCanvas.value.width/2 + circleXPosition.value;
                 }
             }
-           
+
             if (jump.value) {
                 if (circleX.value < gameCanvas.value.width/2) {
-                    circleYPosition.value = circleYPosition.value;
-                } else if (circleYPosition.value > -37) {
-                    circleYPosition.value -= 2;
+                    circleYPosition.value = 0;
+                } else if (circleYPosition.value >= 0 && circleX.value >= gameCanvas.value.width/2) {
                     circleYPosition.value -= 1;
-                    circleYPosition.value -= 2;
                     circleYPosition.value -= 1;
-                    circleYPosition.value -= 2;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 1;
+                    circleYPosition.value -= 1;
                 } else if (circleYPosition.value === -40) {
                     setTimeout(() => {
                         jump.value = false;
                         circleYPosition.value = 0;
                     }, 900);
                 }
+                console.log(circleYPosition.value);
                 circleY.value = gameCanvas.value.height * 0.856 + circleYPosition.value;
             } else  if (doubleJump.value) {
                 if (circleX.value < gameCanvas.value.width/2) {
@@ -125,7 +137,6 @@
                 circleY.value = gameCanvas.value.height * 0.856;
             }
 
-            console.log(circleYPosition.value);
             // Draw circle
             context.fillStyle = '#5b086b';
             context.beginPath();
@@ -167,7 +178,6 @@
                 obstacleXPosition2.value -= 5;
             }
 
-            console.log(doubleJump.value);
             context.fillStyle = '#acc6aa';
             context.beginPath();
             context.arc(gameCanvas.value.width - 11 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.84, 5, 0, 2 * Math.PI);
@@ -193,8 +203,6 @@
             } else {
                 obstacleXPosition3.value -= 5;
             }
-
-            console.log(doubleJump.value);
 
             context.fillStyle = '#000';
             const x1 = gameCanvas.value.width - 11 + obstacleXPosition3.value + 30;
