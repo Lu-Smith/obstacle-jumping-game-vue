@@ -8,9 +8,7 @@
             v-else
             @click="pauseGame">Pause</button>
         </div>
-        <div class="canvasContainer">
-            <canvas ref="gameCanvas" @click="handleMouseEvent"></canvas>
-        </div>
+        <canvas ref="gameCanvas" @click="handleMouseEvent"></canvas>
     </div>
 </template>
 
@@ -78,13 +76,11 @@
         if (context && gameCanvas.value) {
             gameCanvas.value.width = 720;
             gameCanvas.value.height = 720;
-            // Clear the canvas
-            context.clearRect(0, 0, gameCanvas.value.width, gameCanvas.value.height);
-            // Draw ground
-            context.fillStyle = '#000';
-            context.fillRect(0, gameCanvas.value.height * 0.92, gameCanvas.value.width, 4);
-            const game = new Game(gameCanvas.value, context, jump, doubleJump);
+        
+           
+            const game = new Game(gameCanvas.value, context, jump.value, doubleJump.value);
             // Start animation loop
+            
             const animate = () => {
                 context.clearRect(0, 0, gameCanvas.value.width, gameCanvas.value.height);
                 game.render();
@@ -108,13 +104,15 @@
     .gameContainer {
         height: 100vh;
         width: 100vw;
-        @include flex(center, center, column);
     };
 
     .buttonContainer {
-        flex: 1;
         background: $secondary-background;
         @include flex(center, center, column);
+        width: 140px;
+        height: 100px;
+        position: fixed;
+        top: 0;
 
         button {
             padding: 10px 25px;
@@ -127,22 +125,13 @@
         }
     }
 
-    .canvasContainer {
-        flex: 3;
-        background: $secondary-background;
-        @include flex(center, start, column);
-    };
-
-    canvas {
+    #canvas1 {
         background: $primary-background;
-        width: 800px;
-        height: 400px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: 100%;
+        max-height: 100%;
     };
 
-    @include mobile {
-        canvas {
-            width: 100%;
-            height: auto;
-        }
-    };
-</style>, onMounted
+</style>
