@@ -35,6 +35,14 @@ export default class Game {
             }
         })
     }
+    draw() {
+    // Draw ground
+
+    this.context.fillStyle = '#f5f9ee';
+    this.context.fillRect(0, 0, this.canvas.width, this.canvas.height-40);
+    this.context.fillStyle = '#283739';
+    this.context.fillRect(0, this.canvas.height-40, this.canvas.width, 40);
+    }
     resize(width: number, height: number) {
         this.canvas.width = width;
         this.canvas.height = height;
@@ -44,6 +52,8 @@ export default class Game {
         this.ratio = Number((this.height /this.baseHeight).toFixed(2));
     }
     render() {
+        this.draw();
+
         this.player.updatePosition(this.jump, this.doubleJump);
         this.player.draw(this.context);
         this.obstacle.drawDarkTree(this.context);
