@@ -23,6 +23,7 @@ export default class Player {
     updatePosition(jump: boolean, doubleJump: boolean) {
         // Update Y position
         console.log('jumppassed', jump);
+        console.log('doublejumppassed', doubleJump);
         if (jump) {
             this.y -= 2;
             if (this.y < 90) {

@@ -30,6 +30,8 @@
     const gameRunning = ref(false);
     const jump = ref(false);
     const doubleJump = ref(false);
+    let lastClickTime = 0; // Track the time of the last click
+    const doubleJumpTimeout = 300;
     let gameInterval: undefined | number;
     let intervalTime: number = 160;
 
@@ -68,31 +70,51 @@
         }
     }
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-        if (event.key === ' ') {
+    const handleJump = () => {
+        if (!jump.value) {
             jump.value = true;
-            console.log('jumptrue', jump.value);
             setTimeout(() => {
-            jump.value = false; 
-                console.log('jumpfalse', jump.value);
-            }, 6000); 
+                jump.value = false;
+            }, 6000);
         }
- 
+    }
+
+    const handleDoubleJump = () => {
+        if (!doubleJump.value) {
+            doubleJump.value = true;
+            setTimeout(() => {
+                doubleJump.value = false;
+            }, 7000);
+        }
+        console.log('Double jump activated!');
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+        const currentTime = new Date().getTime();
+            if (currentTime - lastClickTime < doubleJumpTimeout) {
+                handleDoubleJump();
+            } else {
+                handleJump();
+            }
+            lastClickTime = currentTime; 
     }
 
     // Define handleMouseEvent function
     const handleMouseEvent = (event: MouseEvent) => {
         if (gameCanvas.value && event.target === gameCanvas.value) {
-            jump.value = true; 
-            setTimeout(() => {
-                jump.value = false; 
-            }, 6000); 
+            const currentTime = new Date().getTime();
+            if (currentTime - lastClickTime < doubleJumpTimeout) {
+                handleDoubleJump();
+            } else {
+                handleJump();
+            }
+            lastClickTime = currentTime; 
         }
     }
 
     const startGame = () => {
         jump.value = false;
-        console.log(jump.value);
+        doubleJump.value = false;
         player = new Player(gameCanvas.value.width * 0.5, gameCanvas.value.height - 22, 10, '#5b086b', gameCanvas.value.height); 
         drawDarkTree = new Obstacle(200, gameCanvas.value.height, 20);
         drawLightTreeDarkTree = new Obstacle(10, gameCanvas.value.height, 100, 20);
