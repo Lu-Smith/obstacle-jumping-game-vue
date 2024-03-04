@@ -16,77 +16,35 @@
 
 <script setup lang="ts">
     import { ref, onMounted } from 'vue';
-    import Player from '../assets/player.ts';
-    import Obstacle from '../assets/obstacle.ts';
-
-    let player: Player;
-    let drawDarkTree: Obstacle;
-    let drawLightTreeDarkTree: Obstacle;
-    let drawStone: Obstacle;
-    let drawCloudLight: Obstacle;
-    let drawCloudDark: Obstacle;
+    import Game from '../assets/game.ts'
 
     const gameCanvas = ref<HTMLCanvasElement | null>(null);
     const gameRunning = ref(false);
     const jump = ref(false);
     const doubleJump = ref(false);
-    let lastClickTime = 0; // Track the time of the last click
+    let lastClickTime = 0;
     const doubleJumpTimeout = 300;
-    let gameInterval: undefined | number;
-    let intervalTime: number = 160;
+    let animationFrameId: number | undefined;
 
     //game logic
 
-    const updateGame = () => {
-        const context = gameCanvas.value?.getContext('2d');
-       
-        if (context && gameCanvas.value) {
-            // Clear the canvas
-            context.clearRect(0, 0, gameCanvas.value.width, gameCanvas.value.height);
-
-            // Draw ground
-            context.fillStyle = '#000';
-            context.fillRect(0, gameCanvas.value.height * 0.92, gameCanvas.value.width, 4);
-
-            // Draw player
-            player.draw(context);
-
-            // Update player position
-            player.updatePosition(jump.value, doubleJump.value);
-
-            // Draw obstacles
-            drawDarkTree.drawDarkTree(context, 10);
-            drawLightTreeDarkTree.drawLightTreeDarkTree(context, 20);
-            drawStone.drawStone(context, 30);
-            drawCloudLight.drawCloudLight(context, 40);
-            drawCloudDark.drawCloudDark(context, 50);
-
-            // Update obstacles positions
-            drawDarkTree.updatePositionDarkTree();
-            drawLightTreeDarkTree.updatePositionLightTreeDarkTree();
-            drawStone.updatePositionStone();
-            drawCloudLight.updatePositionCloudLight();
-            drawCloudDark.updatePositionCloudDark();
-        }
-    }
-
     const handleJump = () => {
-        if (!jump.value) {
+        if (!jump.value && !doubleJump.value) {
             jump.value = true;
             setTimeout(() => {
                 jump.value = false;
             }, 6000);
-        }
+        } 
     }
 
     const handleDoubleJump = () => {
-        if (!doubleJump.value) {
+        if (!doubleJump.value && !jump.value) {
             doubleJump.value = true;
+            jump.value = false;
             setTimeout(() => {
                 doubleJump.value = false;
-            }, 7000);
-        }
-        console.log('Double jump activated!');
+            }, 9000);
+        } 
     }
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -114,24 +72,35 @@
 
     const startGame = () => {
         jump.value = false;
-        doubleJump.value = false;
-        player = new Player(gameCanvas.value.width * 0.5, gameCanvas.value.height - 22, 10, '#5b086b', gameCanvas.value.height); 
-        drawDarkTree = new Obstacle(200, gameCanvas.value.height, 20);
-        drawLightTreeDarkTree = new Obstacle(10, gameCanvas.value.height, 100, 20);
-        drawStone = new Obstacle(10, gameCanvas.value.height, 30);
-        drawCloudLight = new Obstacle(0, gameCanvas.value.height * 0.8, 10, gameCanvas.value.width, gameCanvas.value.height);
-        drawCloudDark = new Obstacle(0, gameCanvas.value.height * 0.6, 10, gameCanvas.value.width, gameCanvas.value.height);
-        gameInterval = setInterval(updateGame, intervalTime);
+        doubleJump.value = false; 
         gameRunning.value = true;
-
+        const context = gameCanvas.value?.getContext('2d');
+        if (context && gameCanvas.value) {
+            gameCanvas.value.width = 720;
+            gameCanvas.value.height = 720;
+            // Clear the canvas
+            context.clearRect(0, 0, gameCanvas.value.width, gameCanvas.value.height);
+            // Draw ground
+            context.fillStyle = '#000';
+            context.fillRect(0, gameCanvas.value.height * 0.92, gameCanvas.value.width, 4);
+            const game = new Game(gameCanvas.value, context, jump, doubleJump);
+            // Start animation loop
+            const animate = () => {
+                context.clearRect(0, 0, gameCanvas.value.width, gameCanvas.value.height);
+                game.render();
+                if (gameRunning.value) {
+                    animationFrameId = requestAnimationFrame(animate);
+                }
+            }
+            animate();
+        }
         window.addEventListener('keydown', handleKeyDown);
     }
 
     const pauseGame = () => {
         gameRunning.value = false;
-        clearInterval(gameInterval); 
+        cancelAnimationFrame(animationFrameId);
     }
-
 
 </script>
 
@@ -176,4 +145,4 @@
             height: auto;
         }
     };
-</style>
+</style>, onMounted
