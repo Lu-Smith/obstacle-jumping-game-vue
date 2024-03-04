@@ -9,60 +9,31 @@
             @click="pauseGame">Pause</button>
         </div>
         <div class="canvasContainer">
-            <canvas ref="gameCanvas"></canvas>
+            <canvas ref="gameCanvas" @click="handleMouseEvent"></canvas>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
     import { ref, onMounted } from 'vue';
+    import Player from '../assets/player.ts';
+    import Obstacle from '../assets/obstacle.ts';
+
+    let player: Player;
+    let drawDarkTree: Obstacle;
+    let drawLightTreeDarkTree: Obstacle;
+    let drawStone: Obstacle;
+    let drawCloudLight: Obstacle;
+    let drawCloudDark: Obstacle;
 
     const gameCanvas = ref<HTMLCanvasElement | null>(null);
+    const gameRunning = ref(false);
     const jump = ref(false);
     const doubleJump = ref(false);
-    const circleXPosition = ref(5);
-    const circleYPosition = ref(0);
-    const obstacleXPosition1 = ref(0);
-    const obstacleXPosition2 = ref(0);
-    const obstacleXPosition3 = ref(0);
-    const obstacleXPosition4 = ref(0);
-    const gameRunning = ref(false);
-    const circleX = ref(0);
-    const circleY = ref(0);
     let gameInterval: undefined | number;
     let intervalTime: number = 160;
 
     //game logic
-    let lastArrowUpPressTime = 0;
-    const handleKeyDown = (event: KeyboardEvent) => {
-        switch (event.key) {
-            case "ArrowUp":
-            if (event.repeat) {
-                return;
-            }
-
-            const currentTime = new Date().getTime();
-
-            if (currentTime - lastArrowUpPressTime < 1000) {
-                // Double click detected
-                doubleJump.value = true;
-            } else {
-                jump.value = true;
-            }
-
-            lastArrowUpPressTime = currentTime;
-            break;
-        }
-    };
-
-    const handleMouseEvent = (event: MouseEvent) => {
-        if (event.detail === 2) {
-            // Double click detected
-            doubleJump.value = true;
-        } else {
-            jump.value = true;
-        }
-    };
 
     const updateGame = () => {
         const context = gameCanvas.value?.getContext('2d');
@@ -75,206 +46,71 @@
             context.fillStyle = '#000';
             context.fillRect(0, gameCanvas.value.height * 0.92, gameCanvas.value.width, 4);
 
-            // Update circle position dynamically
-            if (circleX.value < gameCanvas.value.width/2) {
-                circleXPosition.value++;
-                circleX.value += 5 + circleXPosition.value;
-            } else {
-                if (jump.value) {
-                    circleXPosition.value += 0.5;
-                    circleX.value = 5 + gameCanvas.value.width/2 + circleXPosition.value;
-                } else  if (doubleJump.value) {
-                    circleXPosition.value += 1;
-                    circleX.value = 5 + gameCanvas.value.width/2 + circleXPosition.value;
-                } else {
-                    circleXPosition.value -= 0.4;
-                    circleX.value = 5 + gameCanvas.value.width/2 + circleXPosition.value;
-                }
-            }
+            // Draw player
+            player.draw(context);
 
-            if (jump.value) {
-                if (circleX.value < gameCanvas.value.width/2) {
-                    circleYPosition.value = 0;
-                } else if (circleYPosition.value >= 0 && circleX.value >= gameCanvas.value.width/2) {
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                    circleYPosition.value -= 1;
-                } else if (circleYPosition.value === -40) {
-                    setTimeout(() => {
-                        jump.value = false;
-                        circleYPosition.value = 0;
-                    }, 900);
-                }
-                console.log(circleYPosition.value);
-                circleY.value = gameCanvas.value.height * 0.856 + circleYPosition.value;
-            } else  if (doubleJump.value) {
-                if (circleX.value < gameCanvas.value.width/2) {
-                    circleYPosition.value = circleYPosition.value;
-                } else if (circleYPosition.value > -43) {
-                    circleYPosition.value = -44;
-                } else if (circleYPosition.value === -44) {
-                    setTimeout(() => {
-                        doubleJump.value = false;
-                        circleYPosition.value = 0;
-                    }, 700);
-                }
-                circleY.value = gameCanvas.value.height * 0.856 + circleYPosition.value;
+            // Update player position
+            player.updatePosition(jump.value, doubleJump.value);
 
-            } else {
-                circleY.value = gameCanvas.value.height * 0.856;
-            }
+            // Draw obstacles
+            drawDarkTree.drawDarkTree(context, 10);
+            drawLightTreeDarkTree.drawLightTreeDarkTree(context, 20);
+            drawStone.drawStone(context, 30);
+            drawCloudLight.drawCloudLight(context, 40);
+            drawCloudDark.drawCloudDark(context, 50);
 
-            // Draw circle
-            context.fillStyle = '#5b086b';
-            context.beginPath();
-            context.arc(circleX.value, circleY.value, 10, 0, 2 * Math.PI);
-            context.fill();
+            // Update obstacles positions
+            drawDarkTree.updatePositionDarkTree();
+            drawLightTreeDarkTree.updatePositionLightTreeDarkTree();
+            drawStone.updatePositionStone();
+            drawCloudLight.updatePositionCloudLight();
+            drawCloudDark.updatePositionCloudDark();
+        }
+    }
 
-            // Draw obstacle1 - a dark tree
-            if (circleX.value < gameCanvas.value.width/2 && obstacleXPosition1.value > -288) {
-                obstacleXPosition1.value -= 9;
-            } else if (obstacleXPosition1.value < -288) {
-                obstacleXPosition1.value = 0;
-            } else {
-                obstacleXPosition1.value -= 5;
-            }
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === ' ') {
+            jump.value = true;
+            console.log('jumptrue', jump.value);
+            setTimeout(() => {
+            jump.value = false; 
+                console.log('jumpfalse', jump.value);
+            }, 6000); 
+        }
+ 
+    }
 
-            context.fillStyle = '#4c9173';
-            context.beginPath();
-            context.arc(gameCanvas.value.width - 11 + obstacleXPosition1.value, gameCanvas.value.height * 0.84, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 10 + obstacleXPosition1.value, gameCanvas.value.height * 0.8, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 7 + obstacleXPosition1.value, gameCanvas.value.height * 0.76, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 4 + obstacleXPosition1.value, gameCanvas.value.height * 0.72, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width + obstacleXPosition1.value, gameCanvas.value.height * 0.76, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width + 2 + obstacleXPosition1.value, gameCanvas.value.height * 0.8, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width + 3 + obstacleXPosition1.value, gameCanvas.value.height * 0.84, 5, 0, 2 * Math.PI);
-            context.fill();
-            context.fillStyle = '#402a23';
-            context.beginPath();
-            context.arc(gameCanvas.value.width - 4.5 + obstacleXPosition1.value, gameCanvas.value.height * 0.78, 2.5, 0, 2 * Math.PI);
-            context.fill();
-            context.fillStyle = '#402a23';
-            context.fillRect(gameCanvas.value.width - 7.5 + obstacleXPosition1.value, gameCanvas.value.height * 0.78, 6, 22);
-
-            // Draw obstacle2 - a light tree
-            if (circleX.value < gameCanvas.value.width/2 && obstacleXPosition2.value > -468) {
-                obstacleXPosition2.value -= 9;
-            } else if (obstacleXPosition2.value < -468) {
-                obstacleXPosition2.value = 0;
-            } else {
-                obstacleXPosition2.value -= 5;
-            }
-
-            context.fillStyle = '#acc6aa';
-            context.beginPath();
-            context.arc(gameCanvas.value.width - 11 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.84, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 10 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.8, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 7 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.76, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 4 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.72, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.76, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width + 2 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.8, 5, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width + 3 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.84, 5, 0, 2 * Math.PI);
-            context.fill();
-            context.fillStyle = '#402a23';
-            context.beginPath();
-            context.arc(gameCanvas.value.width - 4.5 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.78, 2.5, 0, 2 * Math.PI);
-            context.fill();
-            context.fillStyle = '#402a23';
-            context.fillRect(gameCanvas.value.width - 7.5 + obstacleXPosition2.value + 150, gameCanvas.value.height * 0.78, 6, 22);
-        
-            // Draw obstacle3 - a stone
-            if (circleX.value < gameCanvas.value.width/2 && obstacleXPosition3.value > - 768) {
-                obstacleXPosition3.value -= 9;
-            } else if (obstacleXPosition3.value < -768) {
-                obstacleXPosition3.value = 0;
-            } else {
-                obstacleXPosition3.value -= 5;
-            }
-
-            context.fillStyle = '#000';
-            const x1 = gameCanvas.value.width - 11 + obstacleXPosition3.value + 30;
-            const y1 = gameCanvas.value.height - 30;
-            const x2 = gameCanvas.value.width - 22 + obstacleXPosition3.value + 30;
-            const y2 = gameCanvas.value.height - 10;
-            const x3 = gameCanvas.value.width + obstacleXPosition3.value + 30;
-            const y3 = gameCanvas.value.height - 10;
-            context.beginPath();
-            context.moveTo(x1, y1);
-            context.lineTo(x2, y2)
-            context.lineTo(x3, y3);
-            context.closePath();
-            context.fill();
-
-            // Draw a cloud - light
-            if (circleX.value < gameCanvas.value.width/2 && obstacleXPosition4.value > - 768) {
-                obstacleXPosition4.value -= 10;
-            } else if (obstacleXPosition4.value < -768) {
-                obstacleXPosition4.value = 0;
-            } else {
-                obstacleXPosition4.value -= 7;
-            }
-
-            context.fillStyle = '#bbe4e9';
-            context.beginPath();
-            context.arc(gameCanvas.value.width - 14 + obstacleXPosition4.value, gameCanvas.value.height * 0.2, 8, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 13 + obstacleXPosition4.value, gameCanvas.value.height * 0.23, 8, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 9 + obstacleXPosition4.value, gameCanvas.value.height * 0.18, 8, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 6 + obstacleXPosition4.value, gameCanvas.value.height * 0.22, 8, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width + obstacleXPosition4.value, gameCanvas.value.height * 0.16, 8, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width + 4 + obstacleXPosition4.value, gameCanvas.value.height * 0.18, 8, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width + 7 + obstacleXPosition4.value, gameCanvas.value.height * 0.22, 8, 0, 2 * Math.PI);
-            context.fill();
-
-            // Draw a cloud - dark
-            if (circleX.value < gameCanvas.value.width/2 && obstacleXPosition4.value > - 768) {
-                obstacleXPosition4.value -= 10.5;
-            } else if (obstacleXPosition4.value < -768) {
-                obstacleXPosition4.value = 0;
-            } else {
-                obstacleXPosition4.value -= 7.5;
-            }
-
-            context.fillStyle = '#79c2d0';
-            context.beginPath();
-            context.arc(gameCanvas.value.width - 14 + obstacleXPosition4.value + 70, gameCanvas.value.height * 0.22, 7.2, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 13 + obstacleXPosition4.value + 70, gameCanvas.value.height * 0.24, 7.2, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 9 + obstacleXPosition4.value + 70, gameCanvas.value.height * 0.21, 7.2, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width - 6 + obstacleXPosition4.value + 70, gameCanvas.value.height * 0.24, 7.2, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width + obstacleXPosition4.value + 70, gameCanvas.value.height * 0.19, 7.2, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width + 4 + obstacleXPosition4.value + 70, gameCanvas.value.height * 0.21, 7.2, 0, 2 * Math.PI);
-            context.arc(gameCanvas.value.width + 7 + obstacleXPosition4.value + 70, gameCanvas.value.height * 0.24, 7.2, 0, 2 * Math.PI);
-            context.fill();
+    // Define handleMouseEvent function
+    const handleMouseEvent = (event: MouseEvent) => {
+        if (gameCanvas.value && event.target === gameCanvas.value) {
+            jump.value = true; 
+            setTimeout(() => {
+                jump.value = false; 
+            }, 6000); 
         }
     }
 
     const startGame = () => {
         jump.value = false;
+        console.log(jump.value);
+        player = new Player(gameCanvas.value.width * 0.5, gameCanvas.value.height - 22, 10, '#5b086b', gameCanvas.value.height); 
+        drawDarkTree = new Obstacle(200, gameCanvas.value.height, 20);
+        drawLightTreeDarkTree = new Obstacle(10, gameCanvas.value.height, 100, 20);
+        drawStone = new Obstacle(10, gameCanvas.value.height, 30);
+        drawCloudLight = new Obstacle(0, gameCanvas.value.height * 0.8, 10, gameCanvas.value.width, gameCanvas.value.height);
+        drawCloudDark = new Obstacle(0, gameCanvas.value.height * 0.6, 10, gameCanvas.value.width, gameCanvas.value.height);
         gameInterval = setInterval(updateGame, intervalTime);
-        gameRunning.value = true
+        gameRunning.value = true;
+
+        window.addEventListener('keydown', handleKeyDown);
     }
 
     const pauseGame = () => {
         gameRunning.value = false;
-        clearInterval(gameInterval);
+        clearInterval(gameInterval); 
     }
 
-    onMounted(() => {
-        window.addEventListener('keydown', handleKeyDown);
-        window.addEventListener('mousedown', handleMouseEvent);
-    });
+
 </script>
 
 <style lang="scss">
