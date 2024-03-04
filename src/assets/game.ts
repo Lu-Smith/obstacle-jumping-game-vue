@@ -7,6 +7,7 @@ export default class Game {
     context: CanvasRenderingContext2D;
     width: number;
     height: number;
+    floorHeight: number;
     player: Player;
     obstacle: Obstacle;
     baseHeight: number;
@@ -25,6 +26,7 @@ export default class Game {
         this.ratio = Number((this.height /this.baseHeight).toFixed(2));
         this.player = new Player(this);
         this.obstacle = new Obstacle(this);
+        this.floorHeight = 40;
 
         this.resize(window.innerWidth, window.innerHeight);
 
@@ -39,9 +41,9 @@ export default class Game {
     // Draw ground
 
     this.context.fillStyle = '#f5f9ee';
-    this.context.fillRect(0, 0, this.canvas.width, this.canvas.height-40);
+    this.context.fillRect(0, 0, this.canvas.width, this.canvas.height-this.floorHeight);
     this.context.fillStyle = '#283739';
-    this.context.fillRect(0, this.canvas.height-40, this.canvas.width, 40);
+    this.context.fillRect(0, this.canvas.height-this.floorHeight, this.canvas.width, this.floorHeight);
     }
     resize(width: number, height: number) {
         this.canvas.width = width;
