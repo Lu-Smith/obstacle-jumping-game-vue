@@ -10,8 +10,8 @@
         </div>
         <canvas ref="gameCanvas"></canvas>
         <div class="assets">
-        <img src="../assets/images/background.png" alt="background" id="background">
-      </div>
+            <img src="../assets/images/background.png" alt="background" id="background">
+        </div>
     </div>
 </template>
 
@@ -24,7 +24,6 @@
     let animationFrameId: number | undefined;
 
     //game logic
-
     const startGame = () => {
         gameRunning.value = true;
         const context = gameCanvas.value?.getContext('2d');
@@ -59,7 +58,6 @@
         cancelAnimationFrame(animationFrameId);
         gameRunning.value = false;
     }
-
 </script>
 
 <style lang="scss">
