@@ -74,7 +74,9 @@
         width: 140px;
         height: 100px;
         position: fixed;
-        top: 0;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
 
         button {
             padding: 0 15px;
