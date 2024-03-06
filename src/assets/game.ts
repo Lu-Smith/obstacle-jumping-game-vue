@@ -147,9 +147,11 @@ export default class Game {
     }
     drawStatusText() {
         this.context.save();
-        this.context.fillText('Score: ' + this.score, this.width - 30, 30);
+        this.context.fillText('Timer: ' + this.formatTimer(), this.width -30, 30); 
+       
         this.context.textAlign = 'left';
-        this.context.fillText('Timer: ' + this.formatTimer(), 10, 30); 
+        this.context.fillText('Score: ' + this.score, 15, 30);
+
         if (this.gameOver) {
             if (this.player.collided) {
                 this.message1 = 'Getting rusty?';
