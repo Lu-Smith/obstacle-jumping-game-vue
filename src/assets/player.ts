@@ -29,7 +29,7 @@ export default class Player {
         }
 
         if (this.isTouchingBottom()) {
-            this.y = this.game.height - this.height;
+            this.y = this.game.height - this.height - 100 * this.game.ratio;
         }
     } 
     draw() {
@@ -46,7 +46,7 @@ export default class Player {
         return this.y <= 100;
     }
     isTouchingBottom() {
-        return this.y >= this.game.height - this.height;
+        return this.y >= this.game.height - this.height - 100 * this.game.ratio;
     }
     flap() {
         console.log( this.y)
