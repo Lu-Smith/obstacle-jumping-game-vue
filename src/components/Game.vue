@@ -8,7 +8,7 @@
             v-else
             @click="pauseGame">Pause</button>
         </div>
-        <canvas ref="gameCanvas" @click="handleMouseEvent"></canvas>
+        <canvas ref="gameCanvas"></canvas>
         <div class="assets">
         <img src="../assets/images/background.png" alt="background" id="background">
       </div>
@@ -33,18 +33,25 @@
             gameCanvas.value.height = 720;
            
             const game = new Game(gameCanvas.value, context);
+
+            let lastTime = 0;
+
             // Start animation loop
-            
-            const animate = () => {
+            const animate = (timeStamp: number) => {
+                const deltaTime = timeStamp - lastTime;
+                lastTime = timeStamp;
                 if (gameCanvas.value.width) {
                 context.clearRect(0, 0, gameCanvas.value.width, gameCanvas.value.height);
                 }
-                game.render();
-                if (gameRunning.value && !game.gameOver) {
+                game.render(deltaTime);
+                if (gameRunning.value) {
                     animationFrameId = requestAnimationFrame(animate);
                 }
+                if (game.gameOver) {
+                    gameRunning.value = false;
+                }
             }
-            animate();
+               requestAnimationFrame(animate);
         }
     }
 
