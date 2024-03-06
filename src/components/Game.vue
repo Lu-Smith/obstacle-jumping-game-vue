@@ -66,6 +66,7 @@
     .gameContainer {
         height: 100vh;
         width: 100vw;
+        overflow: hidden;
     };
 
     .buttonContainer {
