@@ -3,6 +3,11 @@ import Obstacle from './obstacle';
 import Background from './background';
 import Birds from './birds';
 
+interface Collidable {
+    collisionX: number;
+    collisionY: number;
+    collisionRadius: number;
+}
 
 export default class Game {
     canvas: HTMLCanvasElement;
@@ -21,6 +26,9 @@ export default class Game {
     speed: number;
     score: number;
     gameOver: boolean;
+    timer: number;
+    message1: string;
+    message2: string;
 
     constructor(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) {
         this.canvas = canvas;
@@ -39,6 +47,9 @@ export default class Game {
         this.speed = 0;
         this.score = 0;
         this.gameOver = false;
+        this.timer = 0;
+        this.message1 = '';
+        this.message2 = '';
 
 
         this.resize(window.innerWidth, window.innerHeight);
@@ -88,8 +99,10 @@ export default class Game {
         })
         this.score = 0;
         this.gameOver = false;
+        this.timer = 0;
     }
-    render() {
+    render(deltaTime: number) {
+        if (!this.gameOver) this.timer += deltaTime;
         this.background.update();
         this.background.draw();
         this.drawStatusText();
@@ -122,9 +135,36 @@ export default class Game {
         }
 
     }
+    checkCollision(a: Collidable, b: Collidable) {
+        const dx = a.collisionX - b.collisionX;
+        const dy = a.collisionY - b.collisionY;
+        const distance = Math.hypot(dx, dy);
+        const sumOfRadiuses = a.collisionRadius + b.collisionRadius;
+        return distance <= sumOfRadiuses;
+    }
+    formatTimer() {
+        return (this.timer * 0.001).toFixed(1);
+    }
     drawStatusText() {
         this.context.save();
         this.context.fillText('Score: ' + this.score, this.width - 30, 30);
+        this.context.textAlign = 'left';
+        this.context.fillText('Timer: ' + this.formatTimer(), 10, 30); 
+        if (this.gameOver) {
+            if (this.player.collided) {
+                this.message1 = 'Getting rusty?';
+                this.message2 = 'Collision time ' +  this.formatTimer() + ' seconds!' ;
+            } else if (this.obstacles.length <= 0) {
+                this.message1 = 'Nailed it!';
+                this.message2 = 'Can you do it faster than ' +  this.formatTimer() + ' seconds?';
+            }
+            this.context.textAlign = 'center';
+            this.context.font = '30px Bungee';
+            this.context.fillText(this.message1, this.width * 0.5, this.height * 0.5 - 40);
+            this.context.font = '15px Bungee';
+            this.context.fillText(this.message2, this.width * 0.5, this.height * 0.5 - 20);
+            this.context.fillText('Press "R" to try again!', this.width * 0.5, this.height * 0.5);
+        }
         this.context.restore();
     }
 }
