@@ -13,7 +13,7 @@ export default class Player {
     
     constructor(game: Game) {
         this.game =  game;
-        this.x = 20;
+        this.x = 100;
         this.y = 0;
         this.spriteWidth = 200;
         this.spriteHeight = 200;
