@@ -82,7 +82,7 @@ export default class Player {
         this.frameY = 3;
     }
     isTouchingTop() {
-        return this.y <= 200 * this.game.ratio;
+        return this.y <= 20 * this.game.ratio;
     }
     isTouchingBottom() {
         return this.y >= this.game.height - this.height - this.game.bottomMargin;
