@@ -1,6 +1,13 @@
 <template>
     <div class="gameContainer">
         <div class="buttonContainer">
+            <button v-if="!showInfo && !gameRunning" @click="showInstructions" class="infoButton">Instructions</button>
+            <div v-if="showInfo">
+                <button @click="showInstructions" class="infoButton">
+                   X
+                </button>
+                Info
+            </div>
             <button 
             v-if="!gameRunning"
             @click="startGame">Go</button>
@@ -22,6 +29,12 @@
     const gameCanvas = ref<HTMLCanvasElement | null>(null);
     const gameRunning = ref(false);
     let animationFrameId: number | undefined;
+
+    const showInfo = ref(false);
+
+    const showInstructions = () => {
+        showInfo.value = !showInfo.value;
+    }
 
     //game logic
     const startGame = () => {
@@ -76,6 +89,8 @@
         top: 10%;
         left: 50%;
         transform: translate(-50%, -50%);
+        gap: 10px;
+        margin-top: 20px;
 
         button {
             padding: 0 15px;
@@ -85,6 +100,25 @@
             color: $primary-background;
             border: 3px solid $third-color;
             box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 300ms ease-in-out;
+        }
+
+        button:hover {
+            border-radius: 5px;
+            background: rgb(85, 58, 92);
+            border: 1px solid $third-color;
+            box-shadow: none;
+        }
+
+        .infoButton {
+            background: rgb(174, 7, 7);
+            border: 3px solid $primary-background;
+        }
+
+        .infoButton:hover {
+            background: rgb(141, 7, 7);
         }
     }
 
