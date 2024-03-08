@@ -74,6 +74,16 @@ export default class Game {
 
         this.resize(window.innerWidth, window.innerHeight);
 
+            this.obstacles[0].bounce();
+       
+
+            this.obstacles[1].bounce();
+        
+
+ 
+            this.obstacles[2].bounce();
+      
+
         window.addEventListener('resize', e => {
             const target = e.currentTarget as Window;
             if (target) {
@@ -82,7 +92,7 @@ export default class Game {
         });
 
          //mouse controls      
-         this.canvas.addEventListener('mousedown', e => {
+         this.canvas.addEventListener('mousedown', () => {
             this.player.bounce();
         });  
 
