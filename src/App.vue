@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="App">
     <div v-if="startGame">
       <Game />
     </div>
@@ -21,7 +21,7 @@
 </script>
 
 <style lang="scss">
-  div {
+  .App {
     background: $main-background;
     color: $primary-color;
     width: 100vw;
