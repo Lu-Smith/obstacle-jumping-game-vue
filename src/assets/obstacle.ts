@@ -3,9 +3,9 @@ import Game from './game';
 export default class Obstacle {
     game: Game; 
     spriteWidth: number;
-    spriteHeigth: number;
+    spriteHeight: number;
     scaledWidth: number;
-    scaledHeigth: number;
+    scaledHeight: number;
     x: number;
     y: number;
     markedForDeletion: boolean;
@@ -20,9 +20,9 @@ export default class Obstacle {
     constructor(game: Game, x: number) {
         this.game = game;
         this.spriteWidth = 120;
-        this.spriteHeigth = 140;
+        this.spriteHeight = 140;
         this.scaledWidth = this.spriteWidth * this.game.ratio;
-        this.scaledHeigth = this.spriteHeigth * this.game.ratio;
+        this.scaledHeight = this.spriteHeight * this.game.ratio;
         this.x = x;
         this.y = 500 * this.game.ratio;
         this.collisionX = 0;
@@ -38,22 +38,20 @@ export default class Obstacle {
         this.x -= this.game.speed;
         this.y += this.speedY;
         this.collisionX = this.x + this.scaledWidth * 0.5;
-        this.collisionY = this.y + this.scaledHeigth * 0.5;
+        this.collisionY = this.y + this.scaledHeight * 0.5;
 
         if (!this.isTouchingBottom()) {
             this.speedY += this.game.gravity;
         }
 
         if (this.isTouchingBottom()) {
-            this.y = this.game.height - this.spriteHeigth - this.game.bottomMargin;
+            this.y = this.game.height - this.spriteHeight - this.game.bottomMargin;
             this.bounce();
         }
     
         if (this.isOffScreen()) {
             this.markedForDeletion = true;
             this.game.obstacles = this.game.obstacles.filter(obstacle => !obstacle.markedForDeletion);
-            this.game.score++;
-            if (this.game.obstacles.length <= 0) this.game.triggerGameOver();
         }
         if (this.game.checkCollision(this, this.game.player)) {
             this.game.triggerGameOver();
@@ -61,7 +59,7 @@ export default class Obstacle {
         }
     }
     draw(){
-        this.game.context.drawImage(this.image, this.frameX * this.spriteWidth , 0, this.spriteWidth, this.spriteHeigth, this.x, this.y, this.scaledWidth, this.scaledHeigth);
+        this.game.context.drawImage(this.image, this.frameX * this.spriteWidth , 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.scaledWidth, this.scaledHeight);
         if (this.game.debug) {
         this.game.context.beginPath();
         this.game.context.arc(this.collisionX, this.collisionY, 
@@ -71,14 +69,14 @@ export default class Obstacle {
     }
     resize() {
         this.scaledWidth = this.spriteWidth * this.game.ratio;
-        this.scaledHeigth = this.spriteHeigth * this.game.ratio;
+        this.scaledHeight = this.spriteHeight * this.game.ratio;
         this.collisionRadius = this.scaledWidth * 0.4;
     }
     isOffScreen() {
         return this.x < -this.scaledWidth;
     }
     isTouchingBottom() {
-        return this.y >= this.game.height - this.spriteHeigth - this.game.bottomMargin;
+        return this.y >= this.game.height - this.spriteHeight - this.game.bottomMargin;
     }
     isTouchingTop() {
         return this.y <= this.game.height * 0.5 * this.game.ratio;
