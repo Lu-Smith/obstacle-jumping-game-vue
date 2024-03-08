@@ -21,6 +21,13 @@
         <canvas ref="gameCanvas"></canvas>
         <div class="assets">
             <img src="../assets/images/background.png" alt="background" id="background">
+            <img src="../assets/images/player.png" alt="player" id="player">
+            <img src="../assets/images/monsters.png" alt="monsters" id="monsters">
+            <audio src="../assets/media/speed.mp3" id="speed"></audio>
+            <audio src="../assets/media/crunch.mp3" id="crunch"></audio>
+            <audio src="../assets/media/bounce.mp3" id="bounce"></audio>
+            <audio src="../assets/media/win.mp3" id="win"></audio>
+            <audio src="../assets/media/lost.mp3" id="lose"></audio>
         </div>
     </div>
 </template>
