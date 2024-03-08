@@ -52,9 +52,9 @@ export default class Game {
         this.player = new Player(this);
         this.sound = new AudioControls();
         this.birds = [];
-        this.numberOfBirds = 3;
+        this.numberOfBirds = 30;
         this.obstacles = [];
-        this.numberOfObstacles = 10;
+        this.numberOfObstacles = 30;
         this.gravity = 0; 
         this.speed = 0;
         this.score = 0;
@@ -74,16 +74,7 @@ export default class Game {
 
         this.resize(window.innerWidth, window.innerHeight);
 
-            this.obstacles[0].bounce();
        
-
-            this.obstacles[1].bounce();
-        
-
- 
-            this.obstacles[2].bounce();
-      
-
         window.addEventListener('resize', e => {
             const target = e.currentTarget as Window;
             if (target) {
