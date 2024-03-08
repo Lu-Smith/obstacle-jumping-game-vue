@@ -10,11 +10,12 @@
 </template>
 
 <script setup lang="ts">
+  import { ref } from 'vue';
   import Game from './components/Game.vue';
   import IntroPage from './components/IntroPage.vue';
-  import { ref } from 'vue';
 
   const startGame = ref(false);
+
   const handleStartGame = (value: boolean) => {
     startGame.value = value;
   };
@@ -27,9 +28,11 @@
     width: 100vw;
     height: 100vh;
     font-family: 'Roboto', sans-serif;
-  }
 
-  .mainPage {
+    .mainPage {
     @include flex(center, center, column);
   }
+  }
+
+
 </style>
