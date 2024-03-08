@@ -4,4 +4,28 @@
 @import './mixins';
 @import './base';
 
+button {
+    padding: 0 12px;
+    background-color: $primary-color;
+    border: 2px solid $third-color;
+    color: $secondary-background;
+    border-radius: 5px;
+    font-size: $big-font-size;
+    position: fixed;
+    left: 50%;
+    translate: (-50%);
+    margin-top: 10px;
+}
+
+h3 {
+    font-family: "Roboto", sans-serif;
+
+    span {
+        color: $secondary-color;
+    }
+}
+
+
+
+
 
