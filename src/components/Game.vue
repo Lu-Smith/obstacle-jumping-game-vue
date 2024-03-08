@@ -2,17 +2,20 @@
     <div class="gameContainer">
         <div class="buttonContainer">
             <button v-if="!showInfo && !gameRunning" @click="showInstructions" class="infoButton">Instructions</button>
-            <div v-if="showInfo">
+            <div v-if="showInfo" class="info">
                 <button @click="showInstructions" class="infoButton">
                    X
                 </button>
-                Info
+                <div>
+                    <h3>Press <span>Enter</span> or <span>Space</span> key or click a <span>Mouse</span> to jump.</h3>
+                    <h3>Press <span>Shift</span> to speed up.</h3>
+                </div>
             </div>
             <button 
-            v-if="!gameRunning"
+            v-if="!gameRunning && !showInfo"
             @click="startGame">Go</button>
             <button 
-            v-else
+            v-if="gameRunning && !showInfo"
             @click="pauseGame">Pause</button>
         </div>
         <canvas ref="gameCanvas"></canvas>
@@ -74,23 +77,22 @@
 </script>
 
 <style lang="scss">
-    .gameContainer {
-        height: 100vh;
-        width: 100vw;
-        overflow: hidden;
-    };
+.gameContainer {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
 
     .buttonContainer {
-        background: none;
-        @include flex(center, center, column);
-        width: 140px;
-        height: 100px;
-        position: fixed;
-        top: 10%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        gap: 10px;
-        margin-top: 20px;
+    background: none;
+    @include flex(center, center, column);
+    width: 140px;
+    height: 100px;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 10px;
+    margin-top: 20px;
 
         button {
             padding: 0 15px;
@@ -113,8 +115,38 @@
         }
 
         .infoButton {
-            background: rgb(174, 7, 7);
-            border: 3px solid $primary-background;
+            border: 1px solid $primary-background;
+            font-family: "Roboto", sans-serif;
+            padding: 6px 15px;
+            font-weight: 500;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .info {
+            @include flex(center, center, row);
+            gap: 10px;
+            font-family: "Roboto", sans-serif;
+            height: 110vh;
+
+            div {
+                @include flex(start, center, column);
+                margin-top: 40px;
+                gap: 10px;
+
+                h3 {
+                background-color: rgba(0, 0, 0, 0.7);
+                padding: 10px 20px;
+                color: $primary-background;
+                font-family: "Roboto", sans-serif;
+                font-weight: 200;
+
+                    span {
+                        color: rgb(223, 51, 51);
+                        font-weight: 600;
+                        font-family: 'Courier New', Courier, monospace;
+                    }
+                }
+            }
         }
 
         .infoButton:hover {
@@ -130,5 +162,5 @@
         max-width: 100%;
         max-height: 100%;
     };
-
+};
 </style>
