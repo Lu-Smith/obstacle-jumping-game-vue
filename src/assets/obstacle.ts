@@ -32,7 +32,7 @@ export default class Obstacle {
         this.image = document.getElementById('monsters') as CanvasImageSource;
         this.frameX = Math.floor(Math.random() * 4);
         this.speedY = 0;
-        this.bounceSpeed = 6;
+        this.bounceSpeed = 11 * this.game.ratio;;
     }
     update() {
         this.x -= this.game.speed;
@@ -45,7 +45,7 @@ export default class Obstacle {
         }
 
         if (this.isTouchingBottom()) {
-            this.y = this.game.height - this.spriteHeight - this.game.bottomMargin;
+            this.y = this.game.height - this.scaledHeight - this.game.bottomMargin;
             this.bounce();
         }
     
@@ -76,10 +76,10 @@ export default class Obstacle {
         return this.x < -this.scaledWidth;
     }
     isTouchingBottom() {
-        return this.y >= this.game.height - this.spriteHeight - this.game.bottomMargin;
+        return this.y >= this.game.height - this.scaledHeight - this.game.bottomMargin;
     }
     isTouchingTop() {
-        return this.y <= this.game.height * 0.5 * this.game.ratio;
+        return this.y <= 100 * this.game.ratio;
     }
     bounce() {
         if(!this.isTouchingTop()) {
