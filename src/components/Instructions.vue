@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-    import {ref, defineEmits} from 'vue';
+    import {defineEmits} from 'vue';
 
     defineProps(['gameRunning', 'showInfo']);
     const emit = defineEmits(['showInstructions']);
