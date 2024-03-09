@@ -38,6 +38,12 @@ export default class Boubles {
             this.markedForDeletion = true;
             this.game.boubles = this.game.boubles.filter(bouble => !bouble.markedForDeletion);
         }
+
+        if (this.game.boubles.length <= 0) {
+            this.x = this.game.width;
+            this.game.numberOfBoubles = 100;
+            this.game.createBoubles();
+        }
     }
     draw(){
         this.game.context.drawImage(this.image, this.frameX * this.spriteWidth , 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.scaledWidth, this.scaledHeight);
