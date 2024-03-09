@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-    import { ref, onMounted } from 'vue';
+    import { ref } from 'vue';
     import Game from '../assets/game.ts';
     import Instructions from './Instructions.vue';
 
@@ -54,7 +54,7 @@
             const animate = (timeStamp: number) => {
                 const deltaTime = timeStamp - lastTime;
                 lastTime = timeStamp;
-                if (gameCanvas.value.width) {
+                if (gameCanvas.value?.width) {
                 context.clearRect(0, 0, gameCanvas.value.width, gameCanvas.value.height);
                 }
                 game.render(deltaTime);
