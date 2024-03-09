@@ -132,7 +132,7 @@ export default class Game {
         this.width = this.canvas.width;
         this.height = this.canvas.height;
         this.ratio = Number((this.height / this.baseHeight).toFixed(2));
-        this.bottomMargin = Math.floor(50 * this.ratio);
+        this.bottomMargin = this.canvas.height * 0.1;
         this.smallFont = Math.ceil(20 * this.ratio);
         this.largeFont = Math.ceil(45 * this.ratio);
         this.context.font = this.smallFont + 'px Bungee';
