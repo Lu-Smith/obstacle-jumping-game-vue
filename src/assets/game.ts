@@ -3,6 +3,7 @@ import Obstacle from './obstacle';
 import Background from './background';
 import Birds from './birds';
 import AudioControls from './audio';
+import Boubles from './boubles';
 
 interface Collidable {
     collisionX: number;
@@ -17,7 +18,9 @@ export default class Game {
     height: number;
     player: Player;
     birds: Birds[];
+    boubles: Boubles[];
     numberOfBirds: number;
+    numberOfBoubles: number;
     obstacles: Obstacle[];
     numberOfObstacles: number;
     sound: AudioControls;
@@ -52,7 +55,9 @@ export default class Game {
         this.player = new Player(this);
         this.sound = new AudioControls();
         this.birds = [];
+        this.boubles = [];
         this.numberOfBirds = 30;
+        this.numberOfBoubles = 100;
         this.obstacles = [];
         this.numberOfObstacles = 30;
         this.gravity = 0; 
@@ -65,7 +70,7 @@ export default class Game {
         this.smallFont = 20 * this.ratio;
         this.largeFont = 45 * this.ratio;
         this.eventTimer = 0;
-        this.eventInterval = 150;
+        this.eventInterval = 100;
         this.eventUpdate = false;
         this.touchStartX = 0;
         this.swipeDistance = 50;
@@ -142,8 +147,12 @@ export default class Game {
         this.background.resize();
         this.player.resize();
         this.createBirds();
+        this.createBoubles();
         this.birds.forEach(bird => {
             bird.resize();
+        })
+        this.boubles.forEach(bouble => {
+            bouble.resize();
         })
         this.createObstacles();
         this.obstacles.forEach(obstacle => {
@@ -166,6 +175,10 @@ export default class Game {
             bird.update();
             bird.draw();
         });
+        this.boubles.forEach(bouble => {
+            bouble.update();
+            bouble.draw();
+        });
         this.obstacles.forEach(obstacle => {
             obstacle.update();
             obstacle.draw();
@@ -174,11 +187,18 @@ export default class Game {
     createBirds() {
         this.birds = [];
         const firstX = this.baseHeight * this.ratio;
-        const birdsSpacing = 500 * this.ratio;
+        const birdsSpacing = Math.floor(Math.random() * (501 - 400) + 400 * this.ratio);
         for (let i = 0; i < this.numberOfBirds; i++) {
             this.birds.push(new Birds(this, (firstX + i * birdsSpacing)));
         }
-
+    }
+    createBoubles() {
+        this.boubles= [];
+        const firstX = this.baseHeight * this.ratio;
+        const boubleSpacing = Math.floor((Math.random() * 300) * this.ratio);
+        for (let i = 0; i < this.numberOfBoubles; i++) {
+            this.boubles.push(new Boubles(this, (firstX + i * boubleSpacing)));
+        }
     }
     createObstacles() {
         this.obstacles = [];
@@ -187,7 +207,6 @@ export default class Game {
         for (let i = 0; i < this.numberOfObstacles; i++) {
             this.obstacles.push(new Obstacle(this, (firstX + i * obstacleSpacing)));
         }
-
     }
     checkCollision(a: Collidable, b: Collidable) {
         const dx = a.collisionX - b.collisionX;
@@ -239,7 +258,6 @@ export default class Game {
             this.context.fillText(this.message2, this.width * 0.5, this.height * 0.5 - this.smallFont, this.width - 40);
             this.context.fillText('Press "R" to try again!', this.width * 0.5, this.height * 0.5, this.width - 40);
         }
-
         this.context.restore();
     }
 }
