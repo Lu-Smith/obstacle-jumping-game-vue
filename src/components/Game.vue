@@ -29,7 +29,7 @@
 
     const gameCanvas = ref<HTMLCanvasElement | null>(null);
     const gameRunning = ref(false);
-    let animationFrameId: number | undefined;
+    const animationFrameId: { value?: number } = {};
 
     const showInfo = ref(false);
 
@@ -59,7 +59,7 @@
                 }
                 game.render(deltaTime);
                 if (gameRunning.value) {
-                    animationFrameId = requestAnimationFrame(animate);
+                    animationFrameId.value = requestAnimationFrame(animate);
                 }
                 if (game.gameOver) {
                     gameRunning.value = false;
@@ -70,7 +70,9 @@
     }
 
     const pauseGame = () => {
-        cancelAnimationFrame(animationFrameId);
+        if (animationFrameId.value !== undefined) {
+        cancelAnimationFrame(animationFrameId.value);
+        }
         gameRunning.value = false;
     }
 </script>
