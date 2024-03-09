@@ -17,6 +17,11 @@ export default class Player {
     image: CanvasImageSource;
     collisionXStart: number;
     frameY: number;
+    energy: number;
+    maxEnergy: number;
+    minEnergy: number;
+    charging: boolean;
+    barSize: number;
     
     constructor(game: Game) {
         this.game =  game;
@@ -35,17 +40,26 @@ export default class Player {
         this.image = document.getElementById('player') as CanvasImageSource;
         this.collisionXStart = this.collisionX + this.collisionRadius * 0.8;
         this.frameY = 0;
+        this.energy = 30;
+        this.maxEnergy = this.energy * 2;
+        this.minEnergy = 15;
+        this.charging = false;
+        this.barSize = 0;
     }
     update() {
-        this.y += this.speedY;
+        this.handleEnergy();
+        if (this.speedY >= 0 && !this.charging ) this.finsUp();
+        if (!this.charging)  this.y += this.speedY;
         this.collisionY = this.y + this.height * 0.5;
         if (!this.isTouchingBottom()) {
-            this.speedY += this.game.gravity;
+            if (!this.charging ) this.speedY += this.game.gravity;
+        }else {
+            this.speedY = 0;    
         }
 
         if (this.isTouchingBottom()) {
             this.y = this.game.height - this.height - this.game.bottomMargin;
-            this.finsIdle();
+            if (!this.charging ) this.finsIdle();
         }
     } 
     draw() {
@@ -68,15 +82,32 @@ export default class Player {
         this.collisionX = this.x + this.width * 0.7;
         this.collided = false;
         this.frameY = 0;
+        this.barSize = Math.floor(5 * this.game.ratio);
+        this.charging = false;
+    }
+    startCharge() {  
+        if (this.energy >= this.minEnergy && !this.charging) {
+            this.charging = true;
+            this.game.speed = this.game.maxSpeed;
+            this.finsCharge();
+    
+            // this.game.sound.play(this.game.sound.charge);  
+        } else {
+            this.stopCharge(); 
+        }
+    }
+    stopCharge() {
+        this.charging = false;
+        this.game.speed = this.game.minSpeed;
     }
     finsIdle() {
-        this.frameY = 0;
+        if (!this.charging ) this.frameY = 0;
     }
     finsDown() {
-        this.frameY = 1;
+        if (!this.charging ) this.frameY = 1;
     }
     finsUp() {
-        this.frameY = 2;
+        if (!this.charging ) this.frameY = 2;
     }
     finsCharge() {
         this.frameY = 3;
@@ -87,7 +118,22 @@ export default class Player {
     isTouchingBottom() {
         return this.y >= this.game.height - this.height - this.game.bottomMargin;
     }
+    handleEnergy() {
+        if (this.game.eventUpdate) {
+            if (this.energy < this.maxEnergy) {
+                this.energy +=  1;
+            }
+            if (this.charging) {
+                this.energy -= 4           ;     
+                if (this.energy <= 0) {
+                    this.energy = 0;
+                    this.stopCharge();  
+                }
+            }
+        }
+    } 
     bounce() {
+        this.stopCharge();
         if(!this.isTouchingTop()) {
             // this.game.sound.play(this.game.sound.eatingSounds[0]);
             this.speedY = -this.bounceSpeed;

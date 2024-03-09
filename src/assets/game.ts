@@ -43,6 +43,8 @@ export default class Game {
     swipeDistance: number;
     debug: boolean;
     bottomMargin: number;
+    minSpeed: number;
+    maxSpeed: number;
 
     constructor(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) {
         this.canvas = canvas;
@@ -76,10 +78,11 @@ export default class Game {
         this.swipeDistance = 50;
         this.debug = false;
         this.bottomMargin = 0;
+        this.minSpeed = 0;
+        this.maxSpeed = 0;
 
         this.resize(window.innerWidth, window.innerHeight);
 
-       
         window.addEventListener('resize', e => {
             const target = e.currentTarget as Window;
             if (target) {
@@ -102,6 +105,7 @@ export default class Game {
          window.addEventListener('keydown', e => {
             if (e.key === ' ' || e.key === 'Enter') this.player.bounce();
             if (e.key.toLowerCase() === 'r') this.resize(window.innerWidth, window.innerHeight);
+            if (e.key === 'Shift' || e.key.toLowerCase() === 'c') this.player.startCharge(); 
             if (e.key.toLowerCase() === 'd') this.debug = !this.debug;      
         });
 
@@ -121,9 +125,9 @@ export default class Game {
  
          this.canvas.addEventListener('touchend', e => {
              if (e.changedTouches[0].pageX - this.touchStartX > this.swipeDistance) {
-                 return;
+                this.player.startCharge();
              } else {
-                 this.player.bounce();
+                this.player.bounce();
              }
          });
     }
@@ -144,6 +148,8 @@ export default class Game {
 
         this.gravity = 0.15 * this.ratio;
         this.speed = 2 * this.ratio;
+        this.minSpeed = this.speed;
+        this.maxSpeed = this.speed * 5;
         this.background.resize();
         this.player.resize();
         this.createBirds();
@@ -258,6 +264,11 @@ export default class Game {
             this.context.fillText(this.message2, this.width * 0.5, this.height * 0.5 - this.smallFont, this.width - 40);
             this.context.fillText('Press "R" to try again!', this.width * 0.5, this.height * 0.5, this.width - 40);
         }
+        if (this.player.energy <= this.player.minEnergy) this.context.fillStyle = 'red';
+        else if (this.player.energy >= this.player.maxEnergy - 5) this.context.fillStyle = 'green';
+        for (let i = 0; i < this.player.energy; i++) {
+            this.context.fillRect(10, this.height - 20 - this.player.barSize * i, 4 * this.player.barSize, this.player.barSize);
+        } 
         this.context.restore();
     }
 }
