@@ -49,7 +49,6 @@ export default class Birds {
             this.markedForDeletion = true;
             this.game.score++;
             this.game.birds = this.game.birds.filter(key => !key.markedForDeletion);
-            console.log(this.game.birds.length);
         }
     }
     draw(){
@@ -57,9 +56,9 @@ export default class Birds {
         if (this.game.debug) {
             this.game.context.beginPath();
             this.game.context.arc(this.collisionX, this.collisionY, 
-                this.collisionRadius, 0, Math.PI * 2);
+            this.collisionRadius, 0, Math.PI * 2);
             this.game.context.stroke();
-            }
+        }
     }
     resize() {
         this.scaledWidth = this.spriteWidth * this.game.ratio;
