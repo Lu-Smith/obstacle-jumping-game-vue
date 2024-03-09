@@ -32,12 +32,12 @@ export default class Birds {
         this.image = document.getElementById('key') as CanvasImageSource;
     }
     update() {
-        this.x -= this.game.speed;
+        this.x -= this.game.speed * 1.2;
         this.y += this.speedY;
         this.collisionX = this.x + this.scaledWidth * 0.5;
         this.collisionY = this.y + this.scaledHeight * 0.5;
 
-        if (this.y <= 42 || this.y >= this.game.height - this.scaledHeight - this.game.height * 0.6 ) {
+        if (this.y <= 42 || this.y >= this.game.height - this.scaledHeight - this.game.height * 0.35 ) {
             this.speedY *= -1;
         }
         if (this.isOffScreen()) {
