@@ -14,6 +14,7 @@ export default class Birds {
     collisionRadius: number;
     markedForDeletion: boolean;
     image: CanvasImageSource;
+    imageSrc: string;
  
     constructor(game: Game, x: number) {
         this.game = game;
@@ -29,13 +30,20 @@ export default class Birds {
         this.markedForDeletion = false;
         this.speedY = Math.random() < 0.5  ? -1 * this.game.ratio : 1 * this.game.ratio;
         this.markedForDeletion = false;
-        this.image = document.getElementById('key') as CanvasImageSource;
+        this.imageSrc = 'key';
+        this.image = document.getElementById(this.imageSrc) as CanvasImageSource;
     }
     update() {
         this.x -= this.game.speed * 1.2;
         this.y += this.speedY;
         this.collisionX = this.x + this.scaledWidth * 0.5;
         this.collisionY = this.y + this.scaledHeight * 0.5;
+        if (this.game.level % 2 === 0) {
+            this.imageSrc = 'heart';
+        } else {
+            this.imageSrc = 'key';
+        }
+        this.image = document.getElementById(this.imageSrc) as CanvasImageSource;
 
         if (this.y <= 42 || this.y >= this.game.height - this.scaledHeight - this.game.height * 0.35 ) {
             this.speedY *= -1;
@@ -43,7 +51,7 @@ export default class Birds {
         if (this.isOffScreen()) {
             this.markedForDeletion = true;
             this.game.birds = this.game.birds.filter(key => !key.markedForDeletion);
-            if (this.game.birds.length <= 0) this.game.triggerGameOver();
+            // if (this.game.birds.length <= 0) this.game.triggerGameOver();
         }
         if (this.game.checkCollision(this, this.game.player)) {
             this.markedForDeletion = true;
