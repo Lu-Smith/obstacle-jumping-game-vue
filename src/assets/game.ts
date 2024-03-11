@@ -45,6 +45,7 @@ export default class Game {
     bottomMargin: number;
     minSpeed: number;
     maxSpeed: number;
+    level: number;
 
     constructor(canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) {
         this.canvas = canvas;
@@ -80,6 +81,7 @@ export default class Game {
         this.bottomMargin = 0;
         this.minSpeed = 0;
         this.maxSpeed = 0;
+        this.level = 1;
 
         this.resize(window.innerWidth, window.innerHeight);
 
@@ -165,6 +167,7 @@ export default class Game {
             obstacle.resize();
         })
         this.score = 0;
+        this.level = 1;
         this.gameOver = false;
         this.timer = 0;
         this.sound = this.sound;
@@ -174,6 +177,9 @@ export default class Game {
         this.handlePeriodicEvents(deltaTime);
         this.background.update();
         this.background.draw();
+        if (this.score >= 20) {
+            this.level = Math.floor(this.score / 20) + 1;
+        }
         this.drawStatusText();
         this.player.update();
         this.player.draw();
@@ -254,6 +260,8 @@ export default class Game {
         this.context.textAlign = 'left';
         this.context.fillStyle = '#113f67';
         this.context.fillText('Timer: ' + this.formatTimer(), this.smallFont, this.largeFont); 
+        this.context.fillStyle = '#680747';
+        this.context.fillText('Level: ' + this.level, this.smallFont * 10, this.largeFont); 
 
         if (this.gameOver) {
             this.context.textAlign = 'center';
