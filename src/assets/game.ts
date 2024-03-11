@@ -177,8 +177,10 @@ export default class Game {
         this.handlePeriodicEvents(deltaTime);
         this.background.update();
         this.background.draw();
-        if (this.score >= 20) {
-            this.level = Math.floor(this.score / 20) + 1;
+        if (this.birds.length <= 0) {
+            this.level++;
+            this.numberOfBirds = 30;
+            this.createBirds();
         }
         this.drawStatusText();
         this.player.update();
