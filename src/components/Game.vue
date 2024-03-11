@@ -14,6 +14,7 @@
             <img src="../assets/images/player.png" alt="player" id="player">
             <img src="../assets/images/monsters.png" alt="monsters" id="monsters">
             <img src="../assets/images/key.png" alt="key" id="key">
+            <img src="../assets/images/heart.png" alt="heart" id="heart">
             <img src="../assets/images/boubles2.png" alt="boubles" id="boubles2">
             <audio src="../assets/media/speed.mp3" id="speed"></audio>
             <audio src="../assets/media/crunch.mp3" id="crunch"></audio>
