@@ -166,7 +166,6 @@ export default class Game {
         this.obstacles.forEach(obstacle => {
             obstacle.resize();
         })
-        this.score = 0;
         this.level = 1;
         this.gameOver = false;
         this.timer = 0;
@@ -244,6 +243,8 @@ export default class Game {
     triggerGameOver() {
         if (!this.gameOver) { 
             this.gameOver = true; 
+            this.timer = 0;
+            console.log( this.timer)
             if (this.obstacles.length <= 0 ) { 
                 // this.sound.play(this.sound.win);
                 this.message1 = 'Nailed it!';
@@ -263,7 +264,7 @@ export default class Game {
         this.context.fillStyle = '#113f67';
         this.context.fillText('Timer: ' + this.formatTimer(), this.smallFont, this.largeFont); 
         this.context.fillStyle = '#680747';
-        this.context.fillText('Level: ' + this.level, this.smallFont * 10, this.largeFont); 
+        this.context.fillText('Level ' + this.level, this.smallFont * 10, this.largeFont); 
 
         if (this.gameOver) {
             this.context.textAlign = 'center';
