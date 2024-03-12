@@ -33,6 +33,9 @@
     const gameCanvas = ref<HTMLCanvasElement | null>(null);
     const gameRunning = ref(false);
     const animationFrameId: { value?: number } = {};
+    const lastTime = ref(0);
+    const deltaTime = ref(0);
+    let game: Game | null = null;
 
     const showInfo = ref(false);
 
@@ -40,36 +43,51 @@
         showInfo.value = !showInfo.value;
     }
 
+    const resetGame = () => {
+        lastTime.value = 0;
+        deltaTime.value = 0;
+        gameRunning.value = false;
+    }
+
+    // Start animation loop
+    const animate = () => {
+
+        const loop = (timeStamp: number = 0) => {
+            deltaTime.value = timeStamp - lastTime.value;
+            lastTime.value = timeStamp;
+
+                if (game) {
+                    game.render(deltaTime.value);
+                    if (gameRunning.value) {
+                        animationFrameId.value = requestAnimationFrame(loop);
+                    }
+                    if (game.gameOver) {
+                        resetGame();
+                    }
+                }    
+            }   
+        animationFrameId.value = requestAnimationFrame(loop);
+    }
+
     //game logic
     const startGame = () => {
         gameRunning.value = true;
         showInfo.value = false;
-        const context = gameCanvas.value?.getContext('2d');
-        if (context && gameCanvas.value) {
-            gameCanvas.value.width = 720;
-            gameCanvas.value.height = 720;
-           
-            const game = new Game(gameCanvas.value, context);
+        lastTime.value = 0;
+        deltaTime.value = 0;
 
-            let lastTime = 0;
+        if (!game) {
+            const context = gameCanvas.value?.getContext('2d');
 
-            // Start animation loop
-            const animate = (timeStamp: number) => {
-                const deltaTime = timeStamp - lastTime;
-                lastTime = timeStamp;
-                if (gameCanvas.value?.width) {
-                context.clearRect(0, 0, gameCanvas.value.width, gameCanvas.value.height);
-                }
-                game.render(deltaTime);
-                if (gameRunning.value) {
-                    animationFrameId.value = requestAnimationFrame(animate);
-                }
-                if (game.gameOver) {
-                    gameRunning.value = false;
-                }
+            if (context && gameCanvas.value) {
+                gameCanvas.value.width = 720;
+                gameCanvas.value.height = 720;
+
+                game = new Game(gameCanvas.value, context);
             }
-               requestAnimationFrame(animate);
         }
+
+        animate();
     }
 
     const pauseGame = () => {
@@ -78,6 +96,7 @@
         }
         gameRunning.value = false;
     }
+
 </script>
 
 <style lang="scss">
