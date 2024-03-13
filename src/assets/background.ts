@@ -12,8 +12,8 @@ export default class Background {
     
     constructor(game: Game) {
         this.game = game;
-        this.background = 'background1';
-        this.image = document.getElementById( this.background) as CanvasImageSource;
+        this.background = 'background2';
+        this.image = document.getElementById(this.background) as CanvasImageSource;
         this.width = 2400;
         this.height = this.game.baseHeight;
        
@@ -24,13 +24,20 @@ export default class Background {
     update(){
         this.x -= this.game.speed;
         if ( this.x <= - this.scaledWidth) this.x = 0;
-        if (this.game.score < 4 || this.game.score > 12 && this.game.score < 14) {
-            this.background = 'background1';
-        } else if (this.game.score > 4 && this.game.score < 12 || this.game.score > 16 && this.game.score < 20) {
+        if (this.game.score < 4 || this.game.score >= 8 && this.game.score < 12 || this.game.score >= 20 && this.game.score < 24) {
             this.background = 'background2';
-        } else {
+            this.image = document.getElementById(this.background) as CanvasImageSource; 
+        } else if (this.game.score >= 4 && this.game.score < 8 || this.game.score >= 12 && this.game.score < 20 || this.game.score >= 24 && this.game.score < 30) {
             this.background = 'background1';
-        } 
+            this.image = document.getElementById(this.background) as CanvasImageSource; 
+        } else {
+            this.background = 'backgroundFinal';
+            this.image = document.getElementById(this.background) as CanvasImageSource;
+            this.game.numberOfBirds = 0; 
+            setTimeout(() => {
+                this.game.triggerGameOver();
+            }, 3000);
+        }
     }
     draw(){
         this.game.context.drawImage(this.image, this.x, 0, this.scaledWidth, this.scaledHeight);
