@@ -35,7 +35,8 @@
     const animationFrameId: { value?: number } = {};
     const lastTime = ref(0);
     const deltaTime = ref(0);
-    let game: Game | null = null;
+    let game: Game | null = null;   
+    const startNewGame = ref(false);
 
     const showInfo = ref(false);
 
@@ -44,9 +45,10 @@
     }
 
     const resetGame = () => {
-        lastTime.value = 0;
-        deltaTime.value = 0;
         gameRunning.value = false;
+        if (game) {
+            startNewGame.value = true;
+        }
     }
 
     // Start animation loop
@@ -73,11 +75,10 @@
     const startGame = () => {
         gameRunning.value = true;
         showInfo.value = false;
-        lastTime.value = 0;
-        deltaTime.value = 0;
 
-        if (!game) {
+        if (!game || startNewGame.value) {
             const context = gameCanvas.value?.getContext('2d');
+            startNewGame.value = false;
 
             if (context && gameCanvas.value) {
                 gameCanvas.value.width = 720;
@@ -85,8 +86,7 @@
 
                 game = new Game(gameCanvas.value, context);
             }
-        }
-
+        } 
         animate();
     }
 
