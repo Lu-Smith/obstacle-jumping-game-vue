@@ -1,26 +1,33 @@
 <template>
     <div class="instructionsContainer">
         <button v-if="!showInfo && !gameRunning" @click="emitShowInstructions" class="infoButton">Instructions</button>
-        <ul v-if="showInfo" >
-            <button @click="emitShowInstructions" class="infoButton">
-            X
-            </button>
+        <button @click="emitShowInstructions" class="infoButton">X </button>
+        <h3>Can you find the treasure?</h3>
+        <ol v-if="showInfo" >
             <li> 
+                <h3>1. Collect keys</h3>
                 <div class="imageContainer key">
                     <img src="../assets/images/key.png" alt="key">
                 </div>
-                <h3>Collect keys to get points.</h3>
+                <h3>to get points.</h3>
             </li>
             <li> 
-                <h3>Press <span>Enter</span> or <span>Space</span> key or click a <span>Mouse</span> to jump.</h3>
+                <h3>2. Press <span>Enter</span> or <span>Space</span> key or click a <span>Mouse</span> to jump.</h3>
+            </li>
+            <li> 
+                <h3>3. Press <span>Shift</span> or <span>c</span> key to speed up.</h3>
             </li>
             <li>
+                <h3>4. Avoid bouncy monsters</h3>
                 <div class="imageContainer monsters">
                     <img src="../assets/images/monsters.png" alt="monsters"> 
                 </div>
-                <h3>Avoid bouncy monsters.</h3>
+                <h3>or die.</h3>
             </li>
-        </ul>
+            <li> 
+                <h3>3. Press <span>R</span> to restart.</h3>
+            </li>
+        </ol>
     </div>
 </template>
 
@@ -46,10 +53,15 @@
     border: 2px solid rgb(25, 65, 117);
     max-width: 90%;
 
-    ul {
+    h3 {
+        text-align: center
+    }
+
+    ol {
         @include flex(start, center, column);
         border: 2px solid white;
-        list-style-type: disc;
+        padding: 5px;
+        margin-top: 20px;
 
         li {
             @include flex(start, center, row);
@@ -57,6 +69,10 @@
             align-items: start;
             padding: 5px;
             gap: 10px;
+
+            h3 {
+                font-size: 14px;
+            }
 
             .imageContainer {
                 @include flex(start, center, row);
@@ -69,13 +85,13 @@
             }
 
             .imageContainer.key {
-                height: 25px;
-                width: 30px;
+                height: 20px;
+                width: 20px;
             }
 
             .imageContainer.monsters {
-                height: 25px;
-                width: 80px;
+                height: 20px;
+                width: 50px;
             }
         }
     }
