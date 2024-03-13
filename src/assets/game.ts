@@ -243,11 +243,9 @@ export default class Game {
     triggerGameOver() {
         if (!this.gameOver) { 
             this.gameOver = true; 
-            this.timer = 0;
-            console.log( this.timer)
             if (this.obstacles.length <= 0 ) { 
                 // this.sound.play(this.sound.win);
-                this.message1 = 'Nailed it!';
+                this.message1 = 'Nailed it - score:' + this.score + '!';
                 this.message2 = 'Can you do it faster than ' +  this.formatTimer() + ' seconds?';
             } else {   
                 // this.sound.play(this.sound.lose);
