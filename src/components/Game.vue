@@ -11,6 +11,7 @@
         <div class="assets">
             <img src="../assets/images/background1.png" alt="background" id="background1">
             <img src="../assets/images/background2.png" alt="background" id="background2">
+            <img src="../assets/images/backgroundFinal.png" alt="final background" id="backgroundFinal">
             <img src="../assets/images/player.png" alt="player" id="player">
             <img src="../assets/images/monsters.png" alt="monsters" id="monsters">
             <img src="../assets/images/key.png" alt="key" id="key">
