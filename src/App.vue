@@ -30,8 +30,8 @@
     font-family: 'Roboto', sans-serif;
 
     .mainPage {
-    @include flex(center, center, column);
-  }
+      @include flex(center, center, column);
+    }
   }
 
 </style>

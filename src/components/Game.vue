@@ -108,12 +108,12 @@
     overflow: hidden;
 
     #canvas1 {
-    background: $primary-background;
-    position: absolute;
-    top: 0;
-    left: 0;
-    max-width: 100%;
-    max-height: 100%;
-}
+        background: $primary-background;
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: 100%;
+        max-height: 100%;
+    }
 };
 </style>
