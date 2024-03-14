@@ -6,7 +6,7 @@
         <button 
         v-if="gameRunning"
         @click="pauseGame">Pause</button>
-        <Instructions :gameRunning="gameRunning" :showInfo="showInfo" @showInstructions="showInstructions"/>
+        <Instructions :gameRunning="gameRunning" :showInfo="showInfo" @showInstructions="showInstructions" v-if="!gameRunning"/>
         <canvas ref="gameCanvas"></canvas>
         <div class="assets">
             <img src="../assets/images/background1.png" alt="background" id="background1">
