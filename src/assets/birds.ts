@@ -51,7 +51,6 @@ export default class Birds {
         if (this.isOffScreen()) {
             this.markedForDeletion = true;
             this.game.birds = this.game.birds.filter(key => !key.markedForDeletion);
-            // if (this.game.birds.length <= 0) this.game.triggerGameOver();
         }
         if (this.game.checkCollision(this, this.game.player)) {
             this.markedForDeletion = true;
