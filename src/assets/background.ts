@@ -26,18 +26,16 @@ export default class Background {
         if ( this.x <= - this.scaledWidth) this.x = 0;
         if (this.game.score < 4 || this.game.score >= 8 && this.game.score < 12 || this.game.score >= 20 && this.game.score < 24) {
             this.background = 'background2';
-            this.image = document.getElementById(this.background) as CanvasImageSource; 
         } else if (this.game.score >= 4 && this.game.score < 8 || this.game.score >= 12 && this.game.score < 20 || this.game.score >= 24 && this.game.score < 30) {
             this.background = 'background1';
-            this.image = document.getElementById(this.background) as CanvasImageSource; 
         } else {
             this.background = 'backgroundFinal';
-            this.image = document.getElementById(this.background) as CanvasImageSource;
             this.game.numberOfBirds = 0; 
             setTimeout(() => {
                 this.game.triggerGameOver();
-            }, 3000);
+            }, 4000);
         }
+        this.image = document.getElementById(this.background) as CanvasImageSource; 
     }
     draw(){
         this.game.context.drawImage(this.image, this.x, 0, this.scaledWidth, this.scaledHeight);
