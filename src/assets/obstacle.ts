@@ -16,6 +16,7 @@ export default class Obstacle {
     frameX: number;
     speedY: number;
     bounceSpeed: number;
+    imageSrc: string;
  
     constructor(game: Game, x: number) {
         this.game = game;
@@ -29,7 +30,8 @@ export default class Obstacle {
         this.collisionY = 0;
         this.collisionRadius = this.scaledWidth * 0.5;
         this.markedForDeletion = false;
-        this.image = document.getElementById('monsters') as CanvasImageSource;
+        this.imageSrc = 'monsters1';
+        this.image = document.getElementById(this.imageSrc) as CanvasImageSource;
         this.frameX = Math.floor(Math.random() * 4);
         this.speedY = 0;
         this.bounceSpeed = 11 * this.game.ratio;;
@@ -39,6 +41,13 @@ export default class Obstacle {
         this.y += this.speedY;
         this.collisionX = this.x + this.scaledWidth * 0.5;
         this.collisionY = this.y + this.scaledHeight * 0.5;
+ 
+        if (this.game.level % 2 === 0) {
+            this.imageSrc = 'monsters';
+        } else {
+            this.imageSrc = 'monsters1';
+        }
+        this.image = document.getElementById(this.imageSrc) as CanvasImageSource;
 
         if (!this.isTouchingBottom()) {
             this.speedY += this.game.gravity;
