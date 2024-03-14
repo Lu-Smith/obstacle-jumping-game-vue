@@ -1,8 +1,8 @@
 <template>
     <div class="instructionsContainer">
-        <button v-if="!showInfo && !gameRunning" @click="emitShowInstructions" class="infoButton">Instructions</button>
-        <button @click="emitShowInstructions" class="infoButton">X </button>
-        <h3>Can you find the treasure?</h3>
+        <button v-if="!showInfo" @click="emitShowInstructions" class="infoButton">Instructions</button>
+        <button  v-if="showInfo" @click="emitShowInstructions" class="infoButton">X </button>
+        <h3 v-if="showInfo">Can you find the treasure?</h3>
         <ol v-if="showInfo" >
             <li> 
                 <h3>1. Collect keys</h3>
@@ -48,20 +48,19 @@
     font-family: "Roboto", sans-serif;
     position: fixed;
     top: 0;
-    padding: 10px;
     background-color: $primary-background;
-    border: 2px solid rgb(25, 65, 117);
     max-width: 90%;
 
     h3 {
-        text-align: center
+        text-align: center;
+        margin-top: 20px; 
     }
 
     ol {
         @include flex(start, center, column);
         border: 2px solid white;
         padding: 5px;
-        margin-top: 20px;
+        margin: 20px;
 
         li {
             @include flex(start, center, row);
@@ -72,6 +71,7 @@
 
             h3 {
                 font-size: 14px;
+                margin: 0;
             }
 
             .imageContainer {
