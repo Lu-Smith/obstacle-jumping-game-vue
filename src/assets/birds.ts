@@ -54,6 +54,7 @@ export default class Birds {
         }
         if (this.game.checkCollision(this, this.game.player)) {
             this.markedForDeletion = true;
+            this.game.sound.play(this.game.sound.eatingSounds[Math.floor(Math.random() * 2)]);
             this.game.score++;
             this.game.birds = this.game.birds.filter(key => !key.markedForDeletion);
         }
