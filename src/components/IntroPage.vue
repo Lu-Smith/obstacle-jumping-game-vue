@@ -26,6 +26,7 @@
       @include flex(center, center, row);
       color: #7dd87d;
       font-size: $nav-font-size;
+      line-height: $nav-line-height;
       text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.8);
       background-color: rgba(0, 0, 0, 0.8);
       padding: 20px 0;
@@ -54,6 +55,7 @@
     div {
       h1 {
         font-size: $big-font-size;
+        line-height: $big-line-height;
         
         img {
           width: 80px;
@@ -77,6 +79,7 @@
     div {
       h1 {
         font-size: $primary-font-size;
+        line-height: $primary-line-height;
         @include flex(center, center, column);
         img {
           width: 60px;
