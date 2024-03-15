@@ -33,12 +33,11 @@ export default class Player {
         this.height = 0;
         this.speedY = 0;
         this.bounceSpeed = 0;
-        this.collisionX = 10;
-        this.collisionY = 5;
+        this.collisionX = 0;
+        this.collisionY = 0;
         this.collisionRadius = 0;
         this.collided = false;
         this.image = document.getElementById('player') as CanvasImageSource;
-        this.collisionXStart = this.collisionX + this.collisionRadius * 0.8;
         this.frameY = 0;
         this.energy = 30;
         this.maxEnergy = this.energy * 2;
@@ -50,7 +49,7 @@ export default class Player {
         this.handleEnergy();
         if (this.speedY >= 0 && !this.charging ) this.finsUp();
         if (!this.charging)  this.y += this.speedY;
-        this.collisionY = this.y + this.height * 0.5;
+        this.collisionY = this.y + this.height * 0.45;
         if (!this.isTouchingBottom()) {
             if (!this.charging ) this.speedY += this.game.gravity;
         }else {
@@ -78,8 +77,8 @@ export default class Player {
         this.y = this.game.height * 0.5 - this.height * 0.5;
         this.speedY = -8 * this.game.ratio;
         this.bounceSpeed = 5 * this.game.ratio;
-        this.collisionRadius = this.width * 0.2;
-        this.collisionX = this.x + this.width * 0.7;
+        this.collisionRadius = this.width * 0.23;
+        this.collisionX = this.x + this.width * 0.63;
         this.collided = false;
         this.frameY = 0;
         this.barSize = Math.floor(5 * this.game.ratio);
