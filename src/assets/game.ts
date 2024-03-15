@@ -181,6 +181,7 @@ export default class Game {
             this.numberOfBirds = 30;
             this.createBirds();
             this.createObstacles();
+            this.sound.play(this.sound.level);
         }
         this.drawStatusText();
         this.player.update();
