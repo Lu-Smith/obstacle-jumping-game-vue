@@ -20,7 +20,7 @@
             <li>
                 <h3>4. Avoid bouncy monsters</h3>
                 <div class="imageContainer monsters">
-                    <img src="../assets/images/monsters.png" alt="monsters"> 
+                    <img src="../assets/images/monsters1.png" alt="monsters"> 
                 </div>
                 <h3>or die.</h3>
             </li>
