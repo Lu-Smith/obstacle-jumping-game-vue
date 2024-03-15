@@ -102,7 +102,8 @@
         right: 0;
         translate: (-50%);
         width: 100vw;
-        font-size: 14px;
+        font-size: $primary-font-size;
+        line-height: $primary-line-height;
         font-family: "Roboto", sans-serif;
         border: none;
         padding: 5px 0;
