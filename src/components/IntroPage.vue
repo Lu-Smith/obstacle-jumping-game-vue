@@ -19,12 +19,41 @@
   div {
     height: 100vh;
     width: 100vw;
+
     h1 {
       color: $secondary-color;
-      font-size: 72px;
-      font-family: 'Rubik', sans-serif;
+      font-size: $nav-font-size;
+      text-shadow: 15px 5px 15px rgba(250, 250, 250, 1);
     }
 
+    button {
+      font-family: 'Roboto', sans-serif;
+      padding: $button-padding;
+    }
 
+  }
+
+  @media screen and (max-width: 786px) {
+    div {
+      h1 {
+        font-size: $big-font-size;
+      }
+
+      button {
+          padding: $small-button-padding;
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    div {
+      h1 {
+        font-size: $primary-font-size;
+      }
+
+      button {
+        padding: $mobile-button-padding;
+      }
+    }
   }
 </style>
