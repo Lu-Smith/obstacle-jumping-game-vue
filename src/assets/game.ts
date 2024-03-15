@@ -247,7 +247,7 @@ export default class Game {
             this.gameOver = true; 
             if (this.score > 47 ) { 
                 this.sound.play(this.sound.win);
-                this.message1 = 'Nailed it - Your score is ' + this.score + '!';
+                this.message1 = 'Nailed it! You scored ' + this.score + '!';
                 this.message2 = 'Can you do it faster than ' +  this.formatTimer() + ' seconds?';
             } else {   
                 this.sound.play(this.sound.lose);
