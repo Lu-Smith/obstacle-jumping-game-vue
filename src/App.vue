@@ -4,7 +4,7 @@
       <Game />
     </div>
     <div v-if="!startGame" class="mainPage">
-      <IntroPage msg="Welcome" @startGame="handleStartGame"/>
+      <IntroPage msg="Tobby's Treasure Quest" @startGame="handleStartGame"/>
     </div>
   </div>
 </template>
@@ -18,7 +18,7 @@
 
   const handleStartGame = (value: boolean) => {
     startGame.value = value;
-  };
+  }; 
 </script>
 
 <style lang="scss">
@@ -30,7 +30,9 @@
     font-family: 'Roboto', sans-serif;
 
     .mainPage {
-      @include flex(center, center, column);
+      text-align: center;
+      gap: 20px;
+      padding-top: 10%;
     }
   }
 

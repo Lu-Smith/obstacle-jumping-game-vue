@@ -14,7 +14,8 @@ button {
     left: 50%;
     translate: (-50%);
     margin-top: 10px;
-    width: 200px;
+    font-family: 'Roboto', sans-serif;
+    padding: $button-padding;
 }
 
 h3 {
@@ -28,7 +29,7 @@ h3 {
 @media screen and (max-width: 786px) {
     button {
         font-size: $primary-font-size;
-        width: 130px;
+        padding: $small-button-padding;
     }
 }
 
@@ -37,7 +38,7 @@ h3 {
         border-radius: 2px;
         font-size: $mobile-font-size;
         border: 1px solid $third-color;
-        width: 100px;
+        padding: $mobile-button-padding;
     }
 }
 
