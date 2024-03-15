@@ -89,7 +89,7 @@ export default class Player {
             this.game.speed = this.game.maxSpeed;
             this.finsCharge();
     
-            // this.game.sound.play(this.game.sound.charge);  
+            this.game.sound.play(this.game.sound.speed);  
         } else {
             this.stopCharge(); 
         }
@@ -133,7 +133,7 @@ export default class Player {
     bounce() {
         this.stopCharge();
         if(!this.isTouchingTop()) {
-            // this.game.sound.play(this.game.sound.eatingSounds[0]);
+            this.game.sound.play(this.game.sound.bounce);
             this.speedY = -this.bounceSpeed;
             this.finsDown()
         } 
