@@ -50,7 +50,7 @@
 
   }
 
-  @media screen and (max-width: 786px) {
+  @media screen and (max-width: 786px), (max-height: 600px) {
     div {
       h1 {
         font-size: $big-font-size;
@@ -73,7 +73,7 @@
     }
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 480px), (max-height: 300px) {
     div {
       h1 {
         font-size: $primary-font-size;

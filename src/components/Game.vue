@@ -152,7 +152,7 @@
     }
 };
 
-@media screen and (max-width: 786px) {
+@media screen and (max-width: 786px), (max-height: 600px)  {
     .gameContainer {
         .gameDescription {
             max-width: 80vw;
@@ -160,7 +160,7 @@
     };
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 480px), (max-height: 300px) {
     .gameContainer {
         .gameDescription {
             max-width: 90vw;
