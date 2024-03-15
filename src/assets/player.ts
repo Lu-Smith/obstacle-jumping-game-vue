@@ -15,7 +15,6 @@ export default class Player {
     collisionRadius: number;
     collided: boolean;
     image: CanvasImageSource;
-    collisionXStart: number;
     frameY: number;
     energy: number;
     maxEnergy: number;
