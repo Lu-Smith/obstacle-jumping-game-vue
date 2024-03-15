@@ -6,6 +6,7 @@ export default class AudioControls {
     eatingSounds: HTMLAudioElement[]; 
     win: HTMLAudioElement;
     lose: HTMLAudioElement;
+    level: HTMLAudioElement;
 
     constructor() {
         this.speed = document.getElementById('speed') as HTMLAudioElement;
@@ -15,6 +16,7 @@ export default class AudioControls {
         this.eatingSounds = [this.bite, this.crunch];
         this.win = document.getElementById('win') as HTMLAudioElement;
         this.lose = document.getElementById('lose') as HTMLAudioElement;
+        this.level = document.getElementById('level') as HTMLAudioElement;
     }
     play(sound: HTMLAudioElement ) {
         sound.currentTime = 0;
