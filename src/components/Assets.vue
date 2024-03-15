@@ -12,8 +12,10 @@
         <audio :src=Speed id="speed"></audio>
         <audio :src=Crunch id="crunch"></audio>
         <audio :src=Bounce id="bounce"></audio>
+        <audio :src=Bite id="bite"></audio>
         <audio :src=Win id="win"></audio>
         <audio :src=Lost id="lose"></audio>
+        <audio :src=Level id="level"></audio>
     </div>
 </template>
 
@@ -22,5 +24,7 @@
     import Bounce from '../assets/sounds/bounce.mp3';
     import Win from '../assets/sounds/win.mp3';
     import Lost from '../assets/sounds/lost.mp3';
-    import Crunch from '../assets/sounds/lost.mp3';
+    import Crunch from '../assets/sounds/crunch.mp3';
+    import Bite from '../assets/sounds/bite.mp3';
+    import Level from '../assets/sounds/level.mp3';
 </script>
