@@ -11,7 +11,8 @@
         <img src="../assets/images/boubles2.png" alt="boubles" id="boubles2">
         <audio :src=Speed id="speed"></audio>
         <audio :src=Crunch id="crunch"></audio>
-        <audio :src=Bounce id="bounce"></audio>
+        <audio :src=Bounce1 id="bounce1"></audio>
+        <audio :src=Bounce2 id="bounce2"></audio>
         <audio :src=Bite id="bite"></audio>
         <audio :src=Win id="win"></audio>
         <audio :src=Lost id="lose"></audio>
@@ -21,7 +22,8 @@
 
 <script setup lang="ts">
     import Speed from '../assets/sounds/speed.mp3';
-    import Bounce from '../assets/sounds/bounce.mp3';
+    import Bounce1 from '../assets/sounds/bounce.mp3';
+    import Bounce2 from '../assets/sounds/bounce2.mp3';
     import Win from '../assets/sounds/win.mp3';
     import Lost from '../assets/sounds/lost.mp3';
     import Crunch from '../assets/sounds/crunch.mp3';
