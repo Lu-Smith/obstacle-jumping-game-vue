@@ -10,7 +10,7 @@
         <Instructions :gameRunning="gameRunning" :showInfo="showInfo" @showInstructions="showInstructions" v-if="!gameRunning"/>
         <canvas ref="gameCanvas"></canvas>
         <Assets />
-        <audio ref="bounceSound" :src=Bounce id="bounce"></audio>
+        <audio ref="levelSound" :src=Level id="level"></audio>
     </div>
 </template>
 
@@ -20,9 +20,9 @@
     import Instructions from './Instructions.vue';
     import Description from './Description.vue';
     import Assets from './Assets.vue';
-    import Bounce from '../assets/sounds/bounce.mp3';
+    import Level from '../assets/sounds/level.mp3';
 
-    const bounceSound = ref<HTMLAudioElement | null>(null);
+    const levelSound = ref<HTMLAudioElement | null>(null);
 
     const gameCanvas = ref<HTMLCanvasElement | null>(null);
     const gameRunning = ref(false);
@@ -69,8 +69,8 @@
     const startGame = () => {
         gameRunning.value = true;
         showInfo.value = false;
-        if (bounceSound.value) {
-            bounceSound.value.play();
+        if (levelSound.value) {
+            levelSound.value.play();
         }
 
         if (!game || startNewGame.value) {
