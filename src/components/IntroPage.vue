@@ -1,7 +1,11 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
-    <button @click="handleStartGame">Start Game</button>
+    <h1>
+      <img src="../assets//images/fish.png" alt="fish">
+      {{ msg }}
+      <img src="../assets//images/treasure.png" alt="treasure" class="treasure">
+    </h1>
+    <button @click="handleStartGame">Start</button>
   </div>
 </template>
 
@@ -17,18 +21,31 @@
 
 <style lang="scss" scoped>
   div {
-    height: 100vh;
-    width: 100vw;
 
     h1 {
-      color: $secondary-color;
+      @include flex(center, center, row);
+      color: #7dd87d;
       font-size: $nav-font-size;
-      text-shadow: 15px 5px 15px rgba(250, 250, 250, 1);
+      text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px 0;
+
+      img {
+        width: 120px;
+        height: auto;
+      }
+
+      .treasure {
+        width: 80px;
+        height: auto;
+        margin-left: 20px;
+      }
     }
 
     button {
       font-family: 'Roboto', sans-serif;
       padding: $button-padding;
+      margin-top: 30px;
     }
 
   }
@@ -37,6 +54,17 @@
     div {
       h1 {
         font-size: $big-font-size;
+        
+        img {
+          width: 80px;
+          height: auto;
+        }
+
+        .treasure {
+          width: 40px;
+          height: auto;
+          margin-left: 10px;
+        }
       }
 
       button {
@@ -49,10 +77,22 @@
     div {
       h1 {
         font-size: $primary-font-size;
+        @include flex(center, center, column);
+        img {
+          width: 60px;
+          height: auto;
+        }
+
+        .treasure {
+          width: 20px;
+          height: auto;
+          margin-left: 5px;
+        }
       }
 
       button {
         padding: $mobile-button-padding;
+        margin-top: 20px;
       }
     }
   }
