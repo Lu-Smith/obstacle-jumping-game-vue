@@ -8,7 +8,8 @@
         @click="pauseGame">Pause</button>
 
         <div v-if="!gameRunning && deltaTime === 0" class="gameDescription">
-            <h2>Tobby's Treasure Quest</h2>
+            <h2><span>Tobby</span>'s Treasure Quest</h2>
+            <img src="../assets//images/fish.png" alt="fish">
             <p>Tobby's Treasure Quest is an exhilarating underwater adventure where players take on the role of Tobby, a brave little fish on a mission to find hidden treasure. As Tobby swims through vibrant underwater environments, players must navigate through a maze of obstacles.</p>
             <p>The main objective of the game is to collect keys scattered throughout each level while avoiding dangerous monsters and hazards. Players must use their quick reflexes and strategic thinking to outmaneuver the obstacles and progress through increasingly challenging levels.</p>
             <p>Have an amazing adventure!</p>
@@ -117,15 +118,27 @@
 
     .gameDescription {
         position: relative;
-        margin: 10vh auto;
-        margin-top: 20vh;
+        margin: 0 auto;
+        margin-top: 15vh;
         text-align: center;
         max-width: 60vw;
         background-color: rgba(250, 250, 250, 0.8);
         padding: 40px;
+
+        h2 {
+            span {
+                color: $secondary-color;
+            }
+        }
+
+        img {
+            width: 100px;
+            height: auto;
+        }
         
         p {
             font-family: "Roboto", sans-serif;
+            margin-bottom: 20px;
         }
     }
 
