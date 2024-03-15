@@ -133,7 +133,7 @@ export default class Player {
     bounce() {
         this.stopCharge();
         if(!this.isTouchingTop()) {
-            this.game.sound.play(this.game.sound.bounce);
+            this.game.sound.play(this.game.sound.swimmingSounds[Math.floor(Math.random() * 2)]);
             this.speedY = -this.bounceSpeed;
             this.finsDown()
         } 
