@@ -28,7 +28,7 @@ export default class Obstacle {
         this.y = 500 * this.game.ratio;
         this.collisionX = 0;
         this.collisionY = 0;
-        this.collisionRadius = this.scaledWidth * 0.5;
+        this.collisionRadius = this.scaledWidth * 0.35;
         this.markedForDeletion = false;
         this.imageSrc = 'monsters1';
         this.image = document.getElementById(this.imageSrc) as CanvasImageSource;
@@ -79,7 +79,7 @@ export default class Obstacle {
     resize() {
         this.scaledWidth = this.spriteWidth * this.game.ratio;
         this.scaledHeight = this.spriteHeight * this.game.ratio;
-        this.collisionRadius = this.scaledWidth * 0.4;
+        this.collisionRadius = this.scaledWidth * 0.35;
     }
     isOffScreen() {
         return this.x < -this.scaledWidth;
