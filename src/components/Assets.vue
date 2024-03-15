@@ -9,10 +9,18 @@
         <img src="../assets/images/key.png" alt="key" id="key">
         <img src="../assets/images/heart.png" alt="heart" id="heart">
         <img src="../assets/images/boubles2.png" alt="boubles" id="boubles2">
-        <audio src="../assets/media/speed.mp3" id="speed"></audio>
-        <audio src="../assets/media/crunch.mp3" id="crunch"></audio>
-        <audio src="../assets/media/bounce.mp3" id="bounce"></audio>
-        <audio src="../assets/media/win.mp3" id="win"></audio>
-        <audio src="../assets/media/lost.mp3" id="lose"></audio>
+        <audio :src=Speed id="speed"></audio>
+        <audio :src=Crunch id="crunch"></audio>
+        <audio :src=Bounce id="bounce"></audio>
+        <audio :src=Win id="win"></audio>
+        <audio :src=Lost id="lose"></audio>
     </div>
 </template>
+
+<script setup lang="ts">
+    import Speed from '../assets/sounds/speed.mp3';
+    import Bounce from '../assets/sounds/bounce.mp3';
+    import Win from '../assets/sounds/win.mp3';
+    import Lost from '../assets/sounds/lost.mp3';
+    import Crunch from '../assets/sounds/lost.mp3';
+</script>
