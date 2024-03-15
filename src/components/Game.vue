@@ -10,6 +10,7 @@
         <Instructions :gameRunning="gameRunning" :showInfo="showInfo" @showInstructions="showInstructions" v-if="!gameRunning"/>
         <canvas ref="gameCanvas"></canvas>
         <Assets />
+        <audio ref="bounceSound" :src=Bounce id="bounce"></audio>
     </div>
 </template>
 
@@ -19,6 +20,9 @@
     import Instructions from './Instructions.vue';
     import Description from './Description.vue';
     import Assets from './Assets.vue';
+    import Bounce from '../assets/sounds/bounce.mp3';
+
+    const bounceSound = ref<HTMLAudioElement | null>(null);
 
     const gameCanvas = ref<HTMLCanvasElement | null>(null);
     const gameRunning = ref(false);
@@ -65,6 +69,9 @@
     const startGame = () => {
         gameRunning.value = true;
         showInfo.value = false;
+        if (bounceSound.value) {
+            bounceSound.value.play();
+        }
 
         if (!game || startNewGame.value) {
             const context = gameCanvas.value?.getContext('2d');
