@@ -1,23 +1,17 @@
 <template>
   <div>
     <h1>
-      <img src="../assets//images/fish.png" alt="fish">
+      <img src="../assets//images/fish.png" alt="fish" class="fish_title">
       {{ msg }}
       <img src="../assets//images/treasure.png" alt="treasure" class="treasure">
     </h1>
     <button @click="handleStartGame">Start</button>
-    <div class="animtationContainer">
-      <img src="../assets//images/boubles1.png" alt="boubles" class="moving_image1">
-      <img src="../assets//images/boubles2.png" alt="boubles" class="moving_image">
-      <img src="../assets//images/boubles3.png" alt="boubles" class="moving_image2">
-      <img src="../assets//images/boubles4.png" alt="boubles" class="moving_image3">
-      <img src="../assets//images/boubles.png" alt="boubles" class="moving_image4">
-      <img src="../assets//images/fish.png" alt="fish" class="fish">
-    </div>
+    <Animations />
   </div>
 </template>
 
 <script setup lang="ts">
+import Animations from './Animations.vue';
 
   defineProps<{ msg: string }>();
 
@@ -29,130 +23,18 @@
 </script>
 
 <style lang="scss" scoped>
-@keyframes moveUp {
+
+@keyframes fishInTitle {
   0% {
-    bottom: 20px;
-    right: -140%;
     transform: rotate(0deg);
   }
   30% {
-    bottom: 60px;
-    right: -30%;
-    transform: rotate(3deg);
+    transform: rotate(15deg);
   }
   60% {
-    bottom: 50px;
-    right: 30%;
-    transform: rotate(-3deg);
+    transform: rotate(-15deg);
   }
   100% {
-    bottom: 20px;
-    right: 100%;
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes moveUp1 {
-  0% {
-    bottom: -120;
-    right: -20px;
-    transform: rotate(0deg);
-  }
-  50% {
-    bottom: 160%;
-    right: 100px;
-    transform: rotate(180deg);
-  }
-  100% {
-    bottom: 160%;
-    right: 60px;
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes moveUp2 {
-  0% {
-    bottom: -130;
-    right: 20px;
-    transform: rotate(0deg);
-  }
-  50% {
-    bottom: 180%;
-    right: 100px;
-    transform: rotate(360deg);
-  }
-  100% {
-    bottom: 250%;
-    right: -200px;
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes moveUp3 {
-  0% {
-    bottom: -150;
-    right: 200px;
-    transform: rotate(0deg);
-  }
-  40% {
-    bottom: 300px;
-    right: 300px;
-    transform: rotate(180deg);
-  }
-  60% {
-    bottom: 400px;
-    right: 100px;
-    transform: rotate(0deg);
-  }
-  100% {
-    bottom: -150;
-    right: 200px;
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes moveUp4 {
-  0% {
-    bottom: 150px;
-    right: 120%;
-    transform: rotate(0deg);
-  }
-  30% {
-    bottom: 100px;
-    right: 20%;
-    transform: rotate(2deg);
-  }
-  60% {
-    bottom: 120px;
-    right: -20%;
-    transform: rotate(-2deg);
-  }
-  100% {
-    bottom: 150px;
-    right: -120%;
-    transform: rotate(0deg);
-  }
-}
-
-@keyframes fish {
-  0% {
-    bottom: 200px;
-    right: 100%;
-    transform: rotate(0deg);
-  }
-  30% {
-    bottom: 300px;
-    right: 0;
-    transform: rotate(5deg);
-  }
-  60% {
-    bottom: 350px;
-    right: 0;
-    transform: rotate(-5deg);
-  }
-  100% {
-    bottom: 200px;
-    right: -100%;
     transform: rotate(0deg);
   }
 }
@@ -172,6 +54,10 @@
         height: auto;
       }
 
+      .fish_title {
+        animation: fishInTitle 5s linear infinite; 
+      }
+
       .treasure {
         width: 80px;
         height: auto;
@@ -184,46 +70,6 @@
       padding: $button-padding;
       margin-top: 30px;
     }
-
-    .animtationContainer {
-      background-color: rgba(0, 0, 0, 0.8);
-      height: 40%;
-      width: 100vw;
-      position: fixed;
-      bottom: 0;
-      border-top-left-radius: 30%;
-      border-top-right-radius: 30%;
-    }
-
-    .moving_image, .moving_image1, .moving_image2, .moving_image3, .moving_image4, .fish {
-      bottom: 0;
-      position: relative;
-    }
-
-    .moving_image {
-      animation: moveUp 5s linear infinite; 
-    }
-
-    .moving_image1 {
-      animation: moveUp1 5s linear infinite; 
-    }
-
-    .moving_image2 {
-      animation: moveUp2 5s linear infinite; 
-    }
-
-    .moving_image3 {
-      animation: moveUp3 5s linear infinite; 
-    }
-
-    .moving_image4 {
-      animation: moveUp4 5s linear infinite; 
-    }
-
-    .fish {
-      animation: fish 5s linear infinite; 
-    }
-
   }
 
   @media screen and (max-width: 786px), (max-height: 600px) {
