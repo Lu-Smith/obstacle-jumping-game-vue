@@ -29,16 +29,15 @@ h3 {
 @media screen and (max-width: 786px), (max-height: 600px){
     button {
         font-size: $primary-font-size;
-        padding: $small-button-padding;
+        margin-top: 40px;
     }
 }
 
 @media screen and (max-width: 480px), (max-height: 380px) {
     button {
         border-radius: 2px;
-        font-size: $mobile-font-size;
         border: 1px solid $third-color;
-        padding: $mobile-button-padding;
+        margin-top: 60px;
     }
 }
 
