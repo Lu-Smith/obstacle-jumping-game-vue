@@ -25,7 +25,7 @@
                 <h3>or die.</h3>
             </li>
             <li> 
-                <h3>3. Press <span>R</span> to restart.</h3>
+                <h3>3. Press <span>R</span> or <span>tap</span> to restart.</h3>
             </li>
         </ol>
     </div>
