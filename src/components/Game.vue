@@ -10,6 +10,7 @@
         <Instructions :gameRunning="gameRunning" :showInfo="showInfo" @showInstructions="showInstructions" v-if="!gameRunning"/>
         <canvas ref="gameCanvas"></canvas>
         <Assets />
+        <Animations v-if="deltaTime !== 0 && !gameRunning"/>
         <audio ref="levelSound" :src=Level id="level"></audio>
     </div>
 </template>
@@ -21,6 +22,7 @@
     import Description from './Description.vue';
     import Assets from './Assets.vue';
     import Level from '../assets/sounds/level.mp3';
+    import Animations from './Animations.vue';
 
     const levelSound = ref<HTMLAudioElement | null>(null);
 
