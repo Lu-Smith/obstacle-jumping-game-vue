@@ -50,6 +50,7 @@
     top: 0;
     background-color: $primary-background;
     max-width: 90%;
+    z-index: 99;
 
     h3 {
         text-align: center;
