@@ -11,3 +11,10 @@
 <script setup lang="ts">
     defineProps(['gameRunning', 'deltaTime']);
 </script>
+
+<style scoped>
+    .gameDescription{
+        overflow-y: scroll;
+        height: 70%;
+    }
+</style>

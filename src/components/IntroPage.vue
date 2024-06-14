@@ -69,6 +69,7 @@ import Animations from './Animations.vue';
       font-family: 'Roboto', sans-serif;
       padding: $button-padding;
       margin-top: 30px;
+      z-index: 999;
     }
   }
 

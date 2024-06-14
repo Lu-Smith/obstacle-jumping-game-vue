@@ -149,10 +149,14 @@ export default class Game {
         this.height = this.canvas.height;
         this.ratio = Number((this.height / this.baseHeight).toFixed(2));
         this.bottomMargin = this.canvas.height * 0.1;
-        this.smallFont = Math.ceil(20 * this.ratio);
-        this.largeFont = Math.ceil(45 * this.ratio);
+        if( this.width < 1000) {
+            this.smallFont = Math.ceil(16 * this.ratio * 0.75);
+            this.largeFont = Math.ceil(40 * this.ratio * 0.75);
+        } else {
+            this.smallFont = Math.ceil(16 * this.ratio);
+            this.largeFont = Math.ceil(40 * this.ratio);
+        }
         this.context.font = this.smallFont + 'px Bungee';
-
         this.gravity = 0.15 * this.ratio;
         this.speed = 2 * this.ratio;
         this.minSpeed = this.speed;

@@ -18,6 +18,12 @@ button {
     padding: $button-padding;
 }
 
+h2 {
+    font-size: $big-font-size;
+    line-height: $big-line-height;
+    margin-bottom: 20px;
+}
+
 h3 {
     font-family: "Roboto", sans-serif;
 
@@ -26,10 +32,23 @@ h3 {
     }
 }
 
+p {
+    font-size: $primary-font-size;
+}
+
 @media screen and (max-width: 786px), (max-height: 600px){
     button {
         font-size: $primary-font-size;
         margin-top: 40px;
+    }
+
+    h2 {
+        font-size: $primary-font-size;
+        line-height: $primary-line-height;
+    }
+
+    p {
+        font-size: 13px;
     }
 }
 
@@ -38,6 +57,10 @@ h3 {
         border-radius: 2px;
         border: 1px solid $third-color;
         margin-top: 60px;
+    }
+
+    p {
+        font-size: $mobile-font-size;
     }
 }
 
