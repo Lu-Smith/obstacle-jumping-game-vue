@@ -164,7 +164,7 @@
   
     .animtationContainer {
         background-color: rgba(0, 0, 0, 0.8);
-        height: 60%;
+        height: 40%;
         width: 100vw;
         position: fixed;
         bottom: 0;
