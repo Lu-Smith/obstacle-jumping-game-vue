@@ -70,7 +70,7 @@ export default class Game {
         this.timer = 0;
         this.message1 = '';
         this.message2 = '';
-        this.smallFont = 20 * this.ratio;
+        this.smallFont = 25 * this.ratio;
         this.largeFont = 45 * this.ratio;
         this.eventTimer = 0;
         this.eventInterval = 100;
