@@ -16,6 +16,13 @@ button {
     margin-top: 10px;
     font-family: 'Roboto', sans-serif;
     padding: $button-padding;
+    cursor: pointer;
+    transition: all 200ms ease;
+}
+
+button:hover {
+    border: 1px solid $third-color;
+    border-radius: 15px;
 }
 
 h2 {

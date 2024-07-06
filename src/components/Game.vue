@@ -8,6 +8,7 @@
         class="runGame"
         v-if="gameRunning"
         @click="pauseGame">Pause</button>
+        <button id="fullscreenButton">Fullscreen</button>
         <Description :gameRunning="gameRunning" :deltaTime="deltaTime"/>
         <Instructions :gameRunning="gameRunning" :showInfo="showInfo" @showInstructions="showInstructions" v-if="!gameRunning"/>
         <canvas ref="gameCanvas"></canvas>
@@ -106,6 +107,12 @@
     width: 100vw;
     overflow: hidden;
 
+    #fullscreenButton {
+        position: relative;
+        bottom: 0;
+        left: 100px;
+    }
+
     .gameDescription {
         position: relative;
         margin: 0 auto;
@@ -135,7 +142,7 @@
     #canvas1 {
         background: $primary-background;
         position: absolute;
-        top: 0;
+        bottom: 0;
         left: 0;
         max-width: 100%;
         max-height: 100%;
@@ -149,11 +156,19 @@
         }
 
         .runGame {
-            position: absolute;
-            bottom: 5px;
-            left: 60px;
+            translate: (0);
+            left: 10px;
+            top: 0;
             z-index: 100;
-            max-width: 70px;
+            width: 70px;
+        }
+
+        #fullscreenButton {
+            translate: (80%);
+            left: 10px;
+            top: 0;
+            z-index: 100;
+            width: 100px;
         }
     };
 }

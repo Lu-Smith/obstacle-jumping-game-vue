@@ -45,7 +45,7 @@
 .instructionsContainer {
     font-family: "Roboto", sans-serif;
     position: fixed;
-    top: 0;
+    top: 10%;
     background-color: $primary-background;
     max-width: 90%;
     z-index: 99;
