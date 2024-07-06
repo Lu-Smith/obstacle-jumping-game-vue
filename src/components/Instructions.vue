@@ -15,7 +15,7 @@
                 <h3>2. Press <span>Enter</span> or <span>Space</span> key or click a <span>Mouse</span> to jump.</h3>
             </li>
             <li> 
-                <h3>3. Press <span>Shift</span> or <span>c</span> key to speed up.</h3>
+                <h3>3. Press <span>Shift</span> or <span>c</span> key, or <span>swipe right</span> to speed up.</h3>
             </li>
             <li>
                 <h3>4. Avoid bouncy monsters</h3>
@@ -32,8 +32,6 @@
 </template>
 
 <script lang="ts" setup>
-    import {defineEmits} from 'vue';
-
     defineProps(['gameRunning', 'showInfo']);
     const emit = defineEmits(['showInstructions']);
 
