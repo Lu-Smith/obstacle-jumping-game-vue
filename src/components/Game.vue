@@ -1,9 +1,11 @@
 <template>
     <div class="gameContainer">
         <button 
+        class="runGame"
         v-if="!gameRunning"
         @click="startGame">Go</button>
         <button 
+        class="runGame"
         v-if="gameRunning"
         @click="pauseGame">Pause</button>
         <Description :gameRunning="gameRunning" :deltaTime="deltaTime"/>
@@ -144,6 +146,14 @@
     .gameContainer {
         .gameDescription {
             max-width: 80vw;
+        }
+
+        .runGame {
+            position: absolute;
+            bottom: 5px;
+            left: 60px;
+            z-index: 100;
+            max-width: 70px;
         }
     };
 }

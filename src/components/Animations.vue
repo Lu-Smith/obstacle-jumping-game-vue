@@ -167,9 +167,10 @@
         height: 40%;
         width: 100vw;
         position: fixed;
-        bottom: 0;
+        bottom: 40px;
         border-top-left-radius: 30%;
         border-top-right-radius: 30%;
+        z-index: 1;
 
         .moving_image, .moving_image1, .moving_image2, .moving_image3, .moving_image4, .moving_image5, .fish {
         bottom: 0;

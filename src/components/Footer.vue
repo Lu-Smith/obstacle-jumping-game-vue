@@ -26,6 +26,7 @@
         font-size: $primary-font-size;
         line-height: $primary-line-height;
         border-radius: 5px;
+        z-index: 99;
 
         a {
             color: $secondary-background;
