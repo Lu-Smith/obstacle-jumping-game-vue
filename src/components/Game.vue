@@ -4,7 +4,15 @@
         <button 
         class="runGame go"
         v-if="!gameRunning"
-        @click="startGame">Go</button>
+        @click="startGame">Play</button>
+        <button 
+        class="runGame home"
+        v-if="!gameRunning"
+        @click="goHome" >
+            <span class="material-symbols-outlined">
+            home
+            </span>
+        </button>
         <button 
         class="runGame pause"
         v-if="gameRunning"
@@ -29,6 +37,12 @@
     import Assets from './Assets.vue';
     import Level from '../assets/sounds/level.mp3';
     import Animations from './Animations.vue';
+
+    const emit = defineEmits(['goHome']);
+
+    const goHome = () => {
+        emit('goHome');
+    };
 
     const levelSound = ref<HTMLAudioElement | null>(null);
 
@@ -81,6 +95,7 @@
     const startGame = () => {
         gameRunning.value = true;
         showInfo.value = false;
+   
         if (levelSound.value) {
             levelSound.value.play();
         }
@@ -152,7 +167,7 @@
         z-index: 100;
     }
 
-    #fullscreenButton {
+    #fullscreenButton, .home {
         bottom: 10px;
         left: 10px;
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="App">
     <div v-if="startGame">
-      <Game />
+      <Game @goHome="handleGoHome" />
     </div>
     <div v-if="!startGame" class="mainPage">
       <IntroPage msg="Tobby's Treasure Quest" @startGame="handleStartGame"/>
@@ -23,6 +23,10 @@
   const handleStartGame = (value: boolean) => {
     startGame.value = value;
   }; 
+
+  const handleGoHome = () => {
+    startGame.value = false;
+  };
 </script>
 
 <style lang="scss">
