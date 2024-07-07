@@ -41,6 +41,10 @@
       text-align: center;
       gap: 20px;
       padding-top: 10%;
+
+      @media (orientation: landscape) and (max-width: 768px) {
+        padding-top: 0;
+      }
     }
 
     .footerContainer {
