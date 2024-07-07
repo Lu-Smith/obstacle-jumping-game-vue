@@ -13,7 +13,7 @@
 </script>
 
 <style scoped>
-    .gameDescription{
+    .gameDescription {
         overflow-y: scroll;
         height: 70%;
         position: absolute;
@@ -21,5 +21,10 @@
         left: 0;
         right: 0;
         translate: (-50%);
+
+        @media (orientation: landscape) and (max-width: 768px) {
+            top: 0;
+            height: 100%;
+        }
     }
 </style>
