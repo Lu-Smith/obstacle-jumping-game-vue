@@ -11,7 +11,8 @@
         @click="pauseGame">Pause</button>
         <button 
         id="fullscreenButton" 
-        @click="toggleFullscreen">Fullscreen</button>
+        @click="toggleFullscreen"
+        v-if="gameRunning">Fullscreen</button>
         <Description :gameRunning="gameRunning" :deltaTime="deltaTime"/>
         <Instructions :gameRunning="gameRunning" :showInfo="showInfo" @showInstructions="showInstructions" v-if="!gameRunning"/>
         <Assets />
