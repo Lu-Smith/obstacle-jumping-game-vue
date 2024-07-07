@@ -9,7 +9,9 @@
         class="runGame pause"
         v-if="gameRunning"
         @click="pauseGame">Pause</button>
-        <button id="fullscreenButton">Fullscreen</button>
+        <button 
+        id="fullscreenButton" 
+        @click="toggleFullscreen">Fullscreen</button>
         <Description :gameRunning="gameRunning" :deltaTime="deltaTime"/>
         <Instructions :gameRunning="gameRunning" :showInfo="showInfo" @showInstructions="showInstructions" v-if="!gameRunning"/>
         <Assets />
@@ -19,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-    import { ref } from 'vue';
+    import { ref, onMounted, onUnmounted } from 'vue';
     import Game from '../assets/game.ts';
     import Instructions from './Instructions.vue';
     import Description from './Description.vue';
@@ -98,6 +100,38 @@
         }
         gameRunning.value = false;
     }
+
+    // Fullscreen logic
+const toggleFullscreen = () => {
+  const canvasElement = gameCanvas.value;
+  if (canvasElement) {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      if (canvasElement.requestFullscreen) {
+        canvasElement.requestFullscreen();
+      } 
+    }
+  }
+};
+
+const handleFullscreenChange = () => {
+  if (!document.fullscreenElement) {
+    console.log('Exited fullscreen mode');
+  }
+};
+
+onMounted(() => {
+  document.addEventListener('fullscreenchange', handleFullscreenChange);
+  document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+  document.addEventListener('msfullscreenchange', handleFullscreenChange);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+  document.removeEventListener('msfullscreenchange', handleFullscreenChange);
+});
 
 </script>
 
