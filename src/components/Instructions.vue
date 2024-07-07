@@ -45,10 +45,11 @@
 .instructionsContainer {
     font-family: "Roboto", sans-serif;
     position: fixed;
-    top: 40px;
+    bottom: 40px;
     background-color: $primary-background;
-    max-width: 90%;
+    width: 100vw;
     z-index: 99;
+    text-align: center;
 
     .infoButton {
         width: 100vw;
@@ -59,6 +60,7 @@
         padding: 5px 0;
         position: fixed;
         bottom: 0;
+        left: 0;
     }
 
     h3 {
@@ -67,17 +69,16 @@
     }
 
     ol {
-        @include flex(start, center, column);
+        @include flex(center, center, column);
         border: 2px solid white;
         padding: 5px;
         margin: 20px;
 
         li {
-            @include flex(start, center, row);
-            text-align: left;
-            align-items: start;
+            @include flex(center, center, row);
             padding: 5px;
             gap: 10px;
+            align-items: center;
 
             h3 {
                 font-size: 14px;
