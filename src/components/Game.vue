@@ -1,17 +1,17 @@
 <template>
     <div class="gameContainer">
+        <canvas ref="gameCanvas"></canvas>
         <button 
-        class="runGame"
+        class="runGame go"
         v-if="!gameRunning"
         @click="startGame">Go</button>
         <button 
-        class="runGame"
+        class="runGame pause"
         v-if="gameRunning"
         @click="pauseGame">Pause</button>
         <button id="fullscreenButton">Fullscreen</button>
         <Description :gameRunning="gameRunning" :deltaTime="deltaTime"/>
         <Instructions :gameRunning="gameRunning" :showInfo="showInfo" @showInstructions="showInstructions" v-if="!gameRunning"/>
-        <canvas ref="gameCanvas"></canvas>
         <Assets />
         <Animations v-if="deltaTime !== 0 && !gameRunning"/>
         <audio ref="levelSound" :src=Level id="level"></audio>
@@ -106,21 +106,30 @@
     height: 100vh;
     width: 100vw;
     overflow: hidden;
+    position: relative;
+
+    button {
+        font-size: 16px;
+        z-index: 100;
+    }
 
     #fullscreenButton {
-        position: relative;
-        bottom: 0;
-        left: 100px;
+        bottom: 10px;
+        left: 10px;
+    }
+
+    .go, .pause {
+        bottom: 10px;
+        right: 10px;
     }
 
     .gameDescription {
-        position: relative;
         margin: 0 auto;
-        margin-top: 15vh;
         text-align: center;
         max-width: 60vw;
         background-color: rgba(250, 250, 250, 0.8);
         padding: 40px;
+        overflow: hidden;
 
         h2 {
             span {
@@ -146,6 +155,7 @@
         left: 0;
         max-width: 100%;
         max-height: 100%;
+        z-index: 99;
     }
 };
 
@@ -155,20 +165,20 @@
             max-width: 80vw;
         }
 
-        .runGame {
-            translate: (0);
+        #fullscreenButton {
             left: 10px;
-            top: 0;
-            z-index: 100;
-            width: 70px;
+            bottom: 10px;
+            width: 80px;
+            font-size: 12px;
+            padding: 5px;
         }
 
-        #fullscreenButton {
-            translate: (80%);
-            left: 10px;
-            top: 0;
-            z-index: 100;
-            width: 100px;
+        .go, .pause {
+            right: 10px;
+            bottom: 10px;
+            font-size: 12px;
+            padding: 5px 10px;
+            width: 80px;
         }
     };
 }

@@ -45,6 +45,7 @@
       right: 0;
       font-size: $primary-font-size;
       line-height: $primary-line-height;
+      z-index: 100;
     }
   }
 

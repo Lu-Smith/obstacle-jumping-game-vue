@@ -167,7 +167,7 @@
         height: 40%;
         width: 100vw;
         position: fixed;
-        bottom: 40px;
+        bottom: 0;
         border-top-left-radius: 30%;
         border-top-right-radius: 30%;
         z-index: 1;

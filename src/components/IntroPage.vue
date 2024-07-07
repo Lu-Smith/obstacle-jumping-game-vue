@@ -5,7 +5,7 @@
       {{ msg }}
       <img src="../assets//images/treasure.png" alt="treasure" class="treasure">
     </h1>
-    <button @click="handleStartGame">Start</button>
+    <button @click="handleStartGame" class="start">Start</button>
     <Animations />
   </div>
 </template>
@@ -70,6 +70,10 @@ import Animations from './Animations.vue';
       padding: $button-padding;
       margin-top: 30px;
       z-index: 999;
+    }
+
+    .start {
+      translate: (-50%);
     }
   }
 

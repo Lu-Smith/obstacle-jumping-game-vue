@@ -45,10 +45,21 @@
 .instructionsContainer {
     font-family: "Roboto", sans-serif;
     position: fixed;
-    top: 10%;
+    top: 40px;
     background-color: $primary-background;
     max-width: 90%;
     z-index: 99;
+
+    .infoButton {
+        width: 100vw;
+        font-size: $primary-font-size;
+        line-height: $primary-line-height;
+        font-family: "Roboto", sans-serif;
+        border: none;
+        padding: 5px 0;
+        position: fixed;
+        bottom: 0;
+    }
 
     h3 {
         text-align: center;
@@ -93,24 +104,6 @@
                 width: 50px;
             }
         }
-    }
-
-    button {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        translate: (-50%);
-        width: 100vw;
-        font-size: $primary-font-size;
-        line-height: $primary-line-height;
-        font-family: "Roboto", sans-serif;
-        border: none;
-        padding: 5px 0;
-    }
-
-    .infoContainer {
-        background-color: red;
-        height: 20vh;
     }
 
 }
