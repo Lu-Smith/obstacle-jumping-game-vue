@@ -50,6 +50,10 @@
         if (game) {
             startNewGame.value = true;
         }
+
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        }
     }
 
     // Start animation loop
@@ -102,36 +106,36 @@
     }
 
     // Fullscreen logic
-const toggleFullscreen = () => {
-  const canvasElement = gameCanvas.value;
-  if (canvasElement) {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    } else {
-      if (canvasElement.requestFullscreen) {
-        canvasElement.requestFullscreen();
-      } 
+    const toggleFullscreen = () => {
+    const canvasElement = gameCanvas.value;
+    if (canvasElement) {
+        if (document.fullscreenElement) {
+        document.exitFullscreen();
+        } else {
+        if (canvasElement.requestFullscreen) {
+            canvasElement.requestFullscreen();
+        } 
+        }
     }
-  }
-};
+    };
 
-const handleFullscreenChange = () => {
-  if (!document.fullscreenElement) {
-    console.log('Exited fullscreen mode');
-  }
-};
+    const handleFullscreenChange = () => {
+    if (!document.fullscreenElement) {
+        console.log('Exited fullscreen mode');
+    }
+    };
 
-onMounted(() => {
-  document.addEventListener('fullscreenchange', handleFullscreenChange);
-  document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-  document.addEventListener('msfullscreenchange', handleFullscreenChange);
-});
+    onMounted(() => {
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('msfullscreenchange', handleFullscreenChange);
+    });
 
-onUnmounted(() => {
-  document.removeEventListener('fullscreenchange', handleFullscreenChange);
-  document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
-  document.removeEventListener('msfullscreenchange', handleFullscreenChange);
-});
+    onUnmounted(() => {
+    document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.removeEventListener('msfullscreenchange', handleFullscreenChange);
+    });
 
 </script>
 
